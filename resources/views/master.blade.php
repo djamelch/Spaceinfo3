@@ -12,10 +12,17 @@
     <title>Spaceinfo</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-
-    <!-- Custom CSS -->
+    <link href="{{asset('assets/css/register.css')}}" rel="stylesheet">
+   
+    
+     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/blog-home.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    
+
+   
+    <!-- Custom CSS -->
+    
     
 
 
@@ -127,7 +134,7 @@
         <!-- Footer -->
         <footer>
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-8">
                     <p>Copyright by groupe Spaceinfo &copy; <?php echo date("Y"); ?></p>
                 </div>
                 <!-- /.col-lg-12 -->

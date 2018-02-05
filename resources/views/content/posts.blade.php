@@ -18,14 +18,15 @@
                     <a href="/posts/{{$post->id}}">{{$post -> title}}</a>
                 </h2>
                  
-                <p class="lead">
+               <!-- <p class="lead">
                     by <a href="index.php">katib</a>
-                </p>
+                </p>  -->
+
                 <p><span class="glyphicon glyphicon-time"></span>
 
                  Posted on {{$post->created_at ->toDayDateTimeString()}}</p>
                 <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <img class="img-responsive" src="{{asset('storage/'.$post->url)}}" alt="">
                 <hr>
                 <p>{{$post -> body}}</p>
                 <a class="btn btn-primary" href="/posts/{{$post->id}}">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -36,7 +37,7 @@
 
                 <hr>
 
-                <form method="POST" action="/posts/store">
+                <form method="POST" action="/posts/store"  enctype="multipart/form-data">
 
                     {{ csrf_field () }}
 
@@ -52,7 +53,7 @@
 
                     <div class="form-group">
                       <label for="">add file :</label>
-                       <input type="file" class="form-control" name="url" id="url"  >
+                       <input type="file" class="form-control" name="url"   >
                     </div>
                     <button type="submit" class="btn btn-default">add</button>
                 </form>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use App\Post ;
 use DB;
 class PagesController extends Controller
@@ -21,16 +22,16 @@ class PagesController extends Controller
 
       // bach njibo  un sule publication 
 
-    public function post($id)
+    public function post(Post $post)
     {
-      $post =DB::table('posts')->find($id); // njibo post men db b id ta3ha 
+      //$post =DB::table('posts')->find($id); // njibo post men db b id ta3ha 
 
     return view ('content.post', compact('post'));
     }
 
       //bach ndakhlo bup jdida 
 
-    public function store()
+    public function store(Request $request)
 {   
 
     $this ->validate(request(),[
@@ -41,16 +42,25 @@ class PagesController extends Controller
 
 
       ]);
-    $file_name = time().'.'.request->url->getClienOriginalExtention();
 
-     $post = new Post;    //Model
+   
+
+     $post       = new Post;    //Model
      $post->title=request ("title");
-     $post->body= request ("body");
-     $post->url=  request ("url");
+     $post->body = request ("body");
+     
+       
 
-     $post -> save();  
+
+      if ($request->hasFile('url')) {
+        $post->url = $request ->url->store('images');
+        }
 
 
+     $post->save();  
+
+     
+    
     return redirect('/posts'); 
     }
   }

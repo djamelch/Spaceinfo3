@@ -11,6 +11,7 @@
                     <small>Post</small>
                 </h1>
 
+
                 <!-- First Blog Post -->
                 <h2>
                     <a href="/posts/{{$post->id}}">{{$post -> title}}</a>
@@ -22,12 +23,35 @@
                    
 
                 <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <img class="img-responsive" src="{{asset('storage/'.$post->url)}}" alt="">
                 <hr>
                 <p>{{$post -> body}}</p>
-               
-
                 <hr>
+
+                  <div class="comments">
+               @foreach ($post->comments as $comment)
+
+                 <p>{{$comment-> body}}</p>
+
+               @endforeach
+                      
+                  </div>
+
+
+                 <form method="POST" action="/posts/{{$post->id}}/store"  >
+
+                    {{ csrf_field () }}
+
+                    
+
+                    <div class="form-group">
+                      <label for="body">add comment:</label>
+                       <textarea class="form-control" name="body"  rows="5" placeholder="add posts" ></textarea>
+                    </div>
+
+                    
+                    <button type="submit" class="btn btn-default">add comment</button>
+                </form>
  </div>
 
 

@@ -13,4 +13,10 @@ class Post extends Model
 
     ]; 
 
+    // rabt comment bi post
+    
+   public $table = "posts";
+    public function comments(){
+        return $this->hasMany(Comment::Class);
+    }
 }
