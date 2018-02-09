@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
+use App\Comment;
+use App\User;
+
+
 
 class User extends Authenticatable
 {
@@ -16,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','avatar',
     ];
 
     /**
@@ -27,11 +31,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+        //rabt ma3a comments ta3ah
+   
+    public function comments(){
+        return $this->hasMany(Comment::Class);
+    }
+       //ravt ma3a posts ta3ah
+   
+    public function posts(){
+        return $this->hasMany(Post::Class);
+    }
 
     public function roles(){
       
       return $this->belongsToMany('App\Role','user_role','user_id','role_id');
-
     }
 
 

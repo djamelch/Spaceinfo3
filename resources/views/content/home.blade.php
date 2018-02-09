@@ -38,14 +38,14 @@
             </div>
 
             @foreach($posts as $post)
-
+             
             <div class="panel panel-default post">
               <div class="panel-body">
                 <div class="row">
 
                      
                   <div class="col-sm-2">
-                    <a class="post-avatar thumbnail" href="profile.html"><img src="img/user.png" class="text-center">DevUser1</a>
+                    <a class="post-avatar thumbnail" href="/profile"><img src="img/user.png" class="text-center"> {{$post->user->name}}</a>
                     <div class="likes text-center">7 Likes</div><!--col-sm-2 ends -->
                   </div>
 

@@ -22,15 +22,35 @@ Route::post('/posts/{post}/store','CommentsController@store');
 
 
 
-
+//Route::group(['middleware' => ['web']], function () {
+    //routes here
+//});
 Auth::routes();
-
+  //logout
+Route::get('logout', function (){
+Auth::logout();
+return redirect('/');
+});
+  //profile
+Route::get('/profile', 'UserController@profile');
+Route::post('/profile', 'UserController@update_avatar');
+ //home
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home/store', 'HomeController@store');
 Route::post('/home/{post}/store','CommentsController@store');
+ //admin
 Route::get('/admin',[
     
     'uses'=> 'HomeController@admin',
+    'as'  =>'content.admin' ,
+    'middleware'=> 'roles',
+    'roles'=>  ['admin'] ,
+
+
+	]);
+Route::post('/add_role',[
+    
+    'uses'=> 'HomeController@addRole',
     'as'  =>'content.admin' ,
     'middleware'=> 'roles',
     'roles'=>  ['admin'] ,

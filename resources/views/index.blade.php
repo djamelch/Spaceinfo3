@@ -58,9 +58,10 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position:relative; padding-left:50px;">
+    <img src="storage/images/{{ Auth::user()->avatar }}" style="width:35px; height: 40px; position:absolute; top:10px; left:10px; border-radius:70%">
+    {{ Auth::user()->name }} <span class="caret"></span>
+</a>
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
@@ -75,24 +76,31 @@
                                         </form>
                                     </li>
                                 </ul>
+                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i>Profile</a></li>
+                                    <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                </ul>
                             </li>
                         @endif
                     </ul>
                 </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
+            <li class="active"><a href="/home">Home</a></li>
             <li><a href="members.html">Members</a></li>
             <li><a href="groups.html">Groups</a></li>
             <li><a href="photos.html">Photos</a></li>
-            <li><a href="profile.html">Profile</a></li>
-
+            <li class="active"><a href='/profile'>Profile</a></li>
+              @if(Auth::user()->hasRole('Admin'))
+            <li><a href="/admin">Admin</a></li>
+              @endif
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
+            
      @yield('content')
+
 
     <footer>
       <div class="container">

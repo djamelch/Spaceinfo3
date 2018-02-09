@@ -57,7 +57,7 @@ class PagesController extends Controller
         }
 
 
-     $post->save();  
+     //$post->save();  
 
      
     
