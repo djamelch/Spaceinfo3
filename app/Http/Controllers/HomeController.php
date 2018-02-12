@@ -7,6 +7,7 @@ use App\User;
 use App\Post;
 use App\Role;
 use Auth;
+use App\Comment;
 class HomeController extends Controller
 {
     /**
@@ -28,8 +29,8 @@ class HomeController extends Controller
     public function index()
     {
            $posts = Post::all(); // tjib kamel pub
-        
-           return view ('content.home', compact('posts')); // twajahena l page posts w compact tjibana les donne
+            $comments= Comment::all();
+           return view ('content.home', compact('posts','comments')); // twajahena l page posts w compact tjibana les donne
     }
 
 
@@ -76,25 +77,29 @@ class HomeController extends Controller
      public function addRole (Request $request)
     {
         $user=User::where('id',$request['id'])->first();//jibli user li id ta3ah hiya id li jaya f request
-        $user->roles()->detach();
+        //$user->roles()->detach();
 
         if($request['role_user'])
         {
          
         $user->roles()->attach( Role::Where('name','User')->first());
+        $user->save();
         }
          if($request['role_editor'])
         {
 
         $user->roles()->attach(Role::Where('name','Editor')->first());
+        $user->save();
         }
 
          if($request['role_admin'])
         {
 
         $user->roles()->attach(Role::Where('name','Admin')->first());
+        $user->save();
         }
-     return view ('content.admin',compact('users'));
+        $user->save();
+      return redirect('/admin');
     }
 }
 

@@ -45,7 +45,7 @@
 
                      
                   <div class="col-sm-2">
-                    <a class="post-avatar thumbnail" href="/profile"><img src="img/user.png" class="text-center"> {{$post->user->name}}</a>
+                    <a class="post-avatar thumbnail" href="/profile"><img src="storage/images/{{$post->user->avatar}}" class="text-center"> {{$post->user->name}}</a>
                     <div class="likes text-center">7 Likes</div><!--col-sm-2 ends -->
                   </div>
 
@@ -69,15 +69,44 @@
                       <div class="pointer">
                         <p>{{$post -> body}}</p>
                       </div>
+
                       <div class="pointer-border"></div>
-                    </div><!-- bubble end -->
-                     
+
+                    </div> 
+                     @if((Auth::user()->id)===($post->user->id))
+                    <div class="pointer-border">
+                    <!-- bubble end -->
+                        <div class="form-group">
+                         <div class="panel-body">
+                      
+                    
+                    
+
+                    <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
+
+                      {{ csrf_field () }}
+                       {{ method_field ('DELETE') }}
+                        <a href="{{url('home/'.$post -> id.'/edit')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> modifer</a>
+                   
+
+                      <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
+                      </form>
+                    </div>
+                    
+                    </div>
+                    </div>
+                   @endif
+                   
+                    
+                 
+
+
 
                           <!-- add commenters-->
                     <p class="post-actions"><a href="#">Comment</a> - <a href="#">Like</a> - <a href="#">Follow</a> - <a href="#">Share</a></p>
                     <div class="comment-form">
 
-                      <form class="form-inline" method="POST" action="/home/{{$post->id}}/store">
+                      <form class="form-inline" method="POST" action="/home/{{$post->id}}/user/{{Auth::user()->id }}/store">
                            {{ csrf_field () }}
 
                         <div class="form-group">
@@ -95,7 +124,7 @@
                              @foreach ($post->comments as $comment)
                     <div class="comments">
                       <div class="comment">
-                        <a class="comment-avatar pull-left" href="#"><img src="img/user.png"></a>
+                        <a class="comment-avatar pull-left" href="#"><img src=""></a>
                         <div class="comment-text">
                           <p>{{$comment-> body}}</p>
                         </div>

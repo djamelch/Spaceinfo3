@@ -12,7 +12,7 @@
                 <input type="file" name="avatar">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="submit" class="pull-right btn btn-sm btn-primary">
-            </form>
+            </form> 
         </div>
     </div>
 </div>
