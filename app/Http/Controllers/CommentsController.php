@@ -31,8 +31,8 @@ class CommentsController extends Controller
          $comment->post_id=$post->id;
          $comment->user_id=$user->id;
          $comment->save();
-          $comments= Comment::all();
-     return view ('content.home',compact('comments'));
+         
+      return redirect('/home');
    
 }
 }

@@ -31,12 +31,16 @@ Route::get('logout', function (){
 Auth::logout();
 return redirect('/');
 });
+Route::get('/h', function () {
+    return view('content.newuser');
+});
   //profile
 Route::get('/profile', 'UserController@profile');
 Route::post('/profile', 'UserController@update_avatar');
  //home
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home/store', 'HomeController@store');
+
 Route::post('/home/{post}/user/{user}/store','CommentsController@store');
 Route::get('/home/{id}/edit','PostController@edit');
 Route::put('/home/{id}/','PostController@update');

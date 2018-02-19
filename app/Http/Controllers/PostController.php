@@ -17,10 +17,16 @@ class PostController extends Controller
   	 $post=Post::find($id);
      $post->title=$request->input ("title");
      $post->body = $request ->input("body");
+       if ($request->hasFile('url')) 
+        {
+             $post->url = $request ->url->store('images');
+        }
+
      $post->user_id=Auth::user()->id;
      $post->save();
      return redirect('home');
   } 
+  
    public function destroy(Request $request,$id)
   {
   	$post=Post::find($id);

@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
            $posts = Post::all(); // tjib kamel pub
             $comments= Comment::all();
-           return view ('content.home', compact('posts','comments')); // twajahena l page posts w compact tjibana les donne
+           return view ('content.home', compact('posts')); // twajahena l page posts w compact tjibana les donne
     }
 
 

@@ -22,18 +22,28 @@
 
                   <div class="form-group">
                     <textarea class="form-control" name="body"  placeholder="Write on the wall "></textarea>
+
                   </div>
-                  <button type="submit" class="btn btn-default">Submit</button>
-
-
-                  <div class="pull-right">
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-default"><i class="fa fa-pencil" aria-hidden="true"></i> Text</button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-file-image-o" aria-hidden="true"></i> Image</button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-file-video-o" aria-hidden="true"></i> Video</button>
+                    <div class="col-sm-4" style="margin-bottom:20px;">
+                      <label class="btn-bs-file btn btn-primary">
+                        add image
+                       <input type="file" name='url'>
+                      </label>
+                  
                     </div>
-                  </div>
-                </form>
+                     <div class="col-sm-4" style="margin-bottom:20px;">
+                      <label class="btn-bs-file btn btn-primary">
+                        add file
+                       <input type="file" name='url_file'>
+                      </label>
+                  
+                    </div>
+
+                  <button type="submit" class="btn btn-success">Submit</button>
+                  </form>
+                  
+                  
+                
               </div>
             </div>
 
@@ -69,19 +79,23 @@
                       <div class="pointer">
                         <p>{{$post -> body}}</p>
                       </div>
+                       
 
                       <div class="pointer-border"></div>
 
                     </div> 
-                     @if((Auth::user()->id)===($post->user->id))
+
+                         <hr>
+                        <img class="img-responsive" src="{{asset('storage/'.$post->url)}}" alt="">
+                        <hr>
+
                     <div class="pointer-border">
                     <!-- bubble end -->
                         <div class="form-group">
                          <div class="panel-body">
                       
+                     @if(Auth::user()->hasRole('Admin'))
                     
-                    
-
                     <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
 
                       {{ csrf_field () }}
@@ -91,11 +105,26 @@
 
                       <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
                       </form>
+                      @else
+                     @if((Auth::user()->id)===($post->user->id))
+                    
+                       <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
+
+                         {{ csrf_field () }}
+                        {{ method_field ('DELETE') }}
+                        <a href="{{url('home/'.$post -> id.'/edit')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> modifer</a>
+                     
+                      <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
+                      </form>
+                     @endif
+                      @endif
+
+
                     </div>
                     
                     </div>
                     </div>
-                   @endif
+                   
                    
                     
                  
@@ -122,14 +151,18 @@
                     <div class="clearfix"></div>
 
                              @foreach ($post->comments as $comment)
-                    <div class="comments">
+                    <div class="comments"> <a class="comment-avatar pull-left" href=""><img src="storage/images/{{$comment->user->avatar}}">{{$comment->user->name}}</a>
                       <div class="comment">
-                        <a class="comment-avatar pull-left" href="#"><img src=""></a>
+                       
                         <div class="comment-text">
                           <p>{{$comment-> body}}</p>
+                          
                         </div>
+
                       </div>
-                     
+                      <p><span class="glyphicon glyphicon-time"></span>
+
+                          {{$comment->created_at ->toDayDateTimeString()}}</p>
                       <div class="clearfix"></div>
                     </div>
                     @endforeach
