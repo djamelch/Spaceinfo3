@@ -12,7 +12,7 @@
                 </h1>
 
 
-                <!-- First Blog Post -->
+                <!-- First Blog Post   <img class="img-responsive" src="storage/images/{{$image->url_image}}" alt="">-->
                 <h2>
                     <a href="/posts/{{$post->id}}">{{$post -> title}}</a>
                 </h2>

@@ -23,14 +23,20 @@
 
                   <div class="form-group">
                     <textarea class="form-control" name="body"  placeholder="{{$post -> body}} " ></textarea>
-                  <hr>
-                        <img class="img-responsive" src="{{asset('storage/'.$post->url)}}" alt="">
-                        <hr>
+                 
                   </div>
-                    <div class="col-sm-8" style="margin-bottom:20px;">
+
+                    </div>
+                     <div class="col-sm-4" style="margin-bottom:20px;">
+                      <label class="btn-bs-file btn btn-primary">
+                        add image
+                       <input type="file" name='images[]' multiple>
+                      </label>
+                     </div>
+                    <div class="col-sm-4" style="margin-bottom:20px;">
                       <label class="btn-bs-file btn btn-primary">
                         add file
-                       <input type="file" name='url'>
+                       <input type="file" name='file'>
                       </label>
                   
                     </div>

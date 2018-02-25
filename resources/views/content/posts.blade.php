@@ -69,6 +69,19 @@
                 </ul>
                  -->
  </div>
-
+ if ($request->hasFile('images'))
+      
+       {
+           foreach ( $files as $photo) 
+           
+          {
+            $image=new Image;
+            $image->post_id=$post->id;
+            $filename = time().'.'.$photo->getClientOriginalExtension();
+            $photo->move(public_path('storage\images'), $filename);
+            $image->url_image=$filename;
+            $image->save();
+            }
+       }
 
  @endsection

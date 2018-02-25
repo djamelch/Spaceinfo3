@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Post;
 use App\Role;
+use App\Image ;
+use App\File ;
 use Auth;
 use App\Comment;
 class HomeController extends Controller
@@ -37,12 +39,17 @@ class HomeController extends Controller
      public function store(Request $request)
     {   
 
+       
            $this ->validate(request(),[
      
-             'title'=>'required|max:15|min:3',
+             'title'=>'min:3',
              'body' => 'min:5',
      
       ]);
+           $this->validate($request, [
+    
+    'images.*' => 'image|mimes:jpeg,png,jpg,gif',
+]);
 
    
         
@@ -50,20 +57,70 @@ class HomeController extends Controller
           $post->title=request ("title");
           $post->body = request ("body");
           $post->user_id=Auth::user()->id;
-       
-        
-        if ($request->hasFile('url')) 
-        {
-             $post->url = $request ->url->store('images');
+      
+          $post->save(); 
+
+   
+       if ($request->hasFile('images'))
+       // dd($request->all());
+           $files = $request->file('images');
+         {
+           foreach ( $files as $photo) 
+           
+          {
+            $image=new Image;
+            $image->post_id=$post->id;
+            $image->url_image = $photo->store('images');
+          
+            $image->save();
+            }
         }
 
-           $post->save(); 
+
+        if ($request->hasFile('file'))
+       {
+           foreach ($request->file as $file) 
+          {
+             $file=new File;
+             $file->post_id=$post->id;
+         
+             
+             $filename = time().'.'.$request->file->getClientOriginalExtension();
+     
+          
+             $request->file->move(public_path('storage\files'), $filename);
+
+             $file->url_file=$filename;
+             $file->save();
+            }
+       }
+
+          
          return redirect('/home');
+    }
+    public function download($id )
+    {
+       $file=File::find($id);
+       $filename=$file->url_file;
+      
+    
+       //$pathToFile=public_path('storage\files'.$f);
+       // return response()->download($pathToFile);
+       $file_path= public_path(). "/storage/files/".$filename;
+
+$headers = array(
+        'Content-Type: ' . mime_content_type( $file_path ),
+    );
+    return response()->download($file_path,$filename,$headers);
     }
 
 
 
-
+  
+       // if ($request->hasFile('url')) 
+       // {
+         //    $post->url = $request ->url->store('images');
+       // }
        // page admin
     public function admin ()
     {

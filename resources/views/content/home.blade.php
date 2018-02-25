@@ -24,17 +24,18 @@
                     <textarea class="form-control" name="body"  placeholder="Write on the wall "></textarea>
 
                   </div>
-                    <div class="col-sm-4" style="margin-bottom:20px;">
+                    
+                     <div class="col-sm-4" style="margin-bottom:20px;">
                       <label class="btn-bs-file btn btn-primary">
                         add image
-                       <input type="file" name='url'>
+                       <input type="file" name='images[]' multiple>
                       </label>
                   
                     </div>
                      <div class="col-sm-4" style="margin-bottom:20px;">
                       <label class="btn-bs-file btn btn-primary">
                         add file
-                       <input type="file" name='url_file'>
+                       <input type="file" name='file'>
                       </label>
                   
                     </div>
@@ -85,9 +86,25 @@
 
                     </div> 
 
+
+                     
+                         @foreach($post->images as $image)
                          <hr>
-                        <img class="img-responsive" src="{{asset('storage/'.$post->url)}}" alt="">
-                        <hr>
+                           <img class="img-responsive" src="storage/{{$image->url_image}}" alt="">
+
+                         <hr>
+                         @endforeach
+                         
+
+                         @foreach($post->files as $file)
+                         <hr>
+                           
+                            <a href="{{url('home/'.$file->id.'/download')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> download file</a>
+                         <hr>
+                         @endforeach
+
+
+
 
                     <div class="pointer-border">
                     <!-- bubble end -->

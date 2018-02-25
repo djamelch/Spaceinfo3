@@ -40,6 +40,7 @@ Route::post('/profile', 'UserController@update_avatar');
  //home
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home/store', 'HomeController@store');
+Route::get('/home/{url_file}/download', 'HomeController@download');
 
 Route::post('/home/{post}/user/{user}/store','CommentsController@store');
 Route::get('/home/{id}/edit','PostController@edit');

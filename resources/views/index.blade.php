@@ -13,7 +13,7 @@
     <title>Spaceinfo</title>
 
     <!-- Bootstrap Core CSS -->
-    
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
@@ -62,7 +62,7 @@
     <img src="storage/images/{{ Auth::user()->avatar }}" style="width:35px; height: 40px; position:absolute; top:10px; left:10px; border-radius:70%">
     {{ Auth::user()->name }} <span class="caret"></span>
         </a>
-   <ul class="dropdown-menu" role="menu">
+                         <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -109,14 +109,15 @@
     </footer>
 
 
-
+    <script src="{{ asset('js/app.js') }}"></script>
       <!-- jQuery -->
     <script src="{{ asset ('assets/js/jquery.js')}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
+     
     <script src="{{ asset ('assets/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset ('assets/js/bootstrap.js')}}"></script>
-     <script src="{{ asset ('assets/js/jquery.js')}}"></script>
+    
     <script src="{{ asset ('assets/js/ekko-lightbox.js')}}"></script>
 
 </body>
