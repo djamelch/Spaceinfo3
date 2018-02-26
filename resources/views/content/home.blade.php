@@ -13,6 +13,7 @@
                 <h3 class="panel-title">Wall</h3>
               </div>
               <div class="panel-body">
+              
                 <form method="POST" action="/home/store"  enctype="multipart/form-data">
                       {{ csrf_field () }}
                   <div class="form-group">
@@ -60,7 +61,16 @@
                     <div class="likes text-center">7 Likes</div><!--col-sm-2 ends -->
                   </div>
 
-                  
+                   @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br> 
+                     <ul>
+                       @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                       @endforeach
+                     </ul>
+               </div>
+              @endif
                   <div class="col-sm-10">
                   	      <!-- posts -->
 
@@ -90,7 +100,7 @@
                      
                          @foreach($post->images as $image)
                          <hr>
-                           <img class="img-responsive" src="storage/{{$image->url_image}}" alt="">
+                           <img class="img-responsive" src="storage/images/{{$image->url_image}}" alt="">
 
                          <hr>
                          @endforeach
@@ -187,7 +197,12 @@
               </div>
             </div>
           </div>
-          @endforeach
+           @endforeach
+         
+         <div class="raw text-center">
+         {!!$posts->render()!!}
+
+         </div>
 
           
           

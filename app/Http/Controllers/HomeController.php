@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use Illuminate\Http\UploadedFile;
+use DB;
+use Illuminate\Pagination\Paginator;
 use App\User;
 use App\Post;
 use App\Role;
@@ -10,6 +15,7 @@ use App\Image ;
 use App\File ;
 use Auth;
 use App\Comment;
+
 class HomeController extends Controller
 {
     /**
@@ -30,9 +36,12 @@ class HomeController extends Controller
 
     public function index()
     {
-           $posts = Post::all(); // tjib kamel pub
-            $comments= Comment::all();
-           return view ('content.home', compact('posts')); // twajahena l page posts w compact tjibana les donne
+
+           $posts = Post::orderBy("updated_at",'desc')->paginate(4);
+          
+           $comments= Comment::all();
+            
+           return view ('content.home', compact('posts')); 
     }
 
 
@@ -63,14 +72,22 @@ class HomeController extends Controller
    
        if ($request->hasFile('images'))
        // dd($request->all());
-           $files = $request->file('images');
+          
          {
-           foreach ( $files as $photo) 
+           foreach ($request->images as $photo) 
            
           {
             $image=new Image;
             $image->post_id=$post->id;
-            $image->url_image = $photo->store('images');
+           // $image->url_image = $photo->store('images');
+             $image->save();
+           $filename=$image->id
+                             .'_'
+                             .preg_replace('/([^A-Za-z])+/', '-', trim($post->title))
+                             .'.'
+                             .strtolower($photo->getClientOriginalExtension());
+            $photo->move(public_path('storage\images'), $filename); 
+             $image->url_image=$filename;               
           
             $image->save();
             }
@@ -79,21 +96,20 @@ class HomeController extends Controller
 
         if ($request->hasFile('file'))
        {
-           foreach ($request->file as $file) 
-          {
-             $file=new File;
-             $file->post_id=$post->id;
+           
+             $files=new File;
+             $files->post_id=$post->id;
          
              
              $filename = time().'.'.$request->file->getClientOriginalExtension();
-     
+             //$files->url_file =$request->file->store('files');
           
-             $request->file->move(public_path('storage\files'), $filename);
-
-             $file->url_file=$filename;
-             $file->save();
+            $request->file->move(public_path('storage\files'), $filename);
+            $files->url_file=$filename;
+            
+             $files->save();
             }
-       }
+       
 
           
          return redirect('/home');
@@ -108,7 +124,7 @@ class HomeController extends Controller
        // return response()->download($pathToFile);
        $file_path= public_path(). "/storage/files/".$filename;
 
-$headers = array(
+       $headers = array(
         'Content-Type: ' . mime_content_type( $file_path ),
     );
     return response()->download($file_path,$filename,$headers);
