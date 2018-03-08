@@ -6,49 +6,52 @@
 
       <div class="container">
         <div class="row">
-        <nav class="navbar navbar-default">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <!-- Branding Image -->
-                    
-
-        </div>
-        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                     <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/all_poste"> Publications</a></li>
-            <li class="active"><a href="/members">Members</a></li>
-            <li class="active"><a href="/groups">groups</a></li>
-            <li class="active"><a href="/">page</a> </li>
-           
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+      
 <div class="col-md-12">
 
-                <h1 class="page-header">
-                    
-                    <small>is admin</small>
-                </h1>
+               <div >
+   <table class="table table-hover">
+            <tr>
 
-@yield('content')
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>user</th>
+                <th>editor</th>
+                <th>admin</th>
+             </tr>
+             @foreach($users as $user)
+             <form method='post' action='/add_role'>
+             {{ csrf_field () }}
+
+                <input type="hidden" name="id" value='{{$user->id}}'>
+             <tr>
+
+                <th>{{$user->id}}</th>
+                <td>{{$user->name}}</td>
+                <td>{{$user->email}}</td>
+
+                <td> 
+                   <input type ='checkbox' name'role_user' onchange="this.form.submit()" {{$user->hasRole('User') ? 'checked' : ' '}} >
+                </td>
+
+                <td><input type ='checkbox' name''role_editor'' onchange="this.form.submit()"{{$user->hasRole('Editor') ? 'checked' : ' '}} ></td>
+
+                <td><input type ='checkbox' name''role_admin'' onchange="this.form.submit()" {{$user->hasRole('Admin') ? 'checked' : ' '}} ></td>
+
+             </tr> 
+             <form>
+             @endforeach
+    </table>
+                 
+                
+         
 
  </div>
+
+
  </div></div>
+ 
 
 
  @endsection

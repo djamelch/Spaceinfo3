@@ -50,6 +50,7 @@
             </div>
 
             @foreach($posts as $post)
+            @if($post->accpet === 1)
              
             <div class="panel panel-default post">
               <div class="panel-body">
@@ -197,6 +198,7 @@
               </div>
             </div>
           </div>
+          @endif
            @endforeach
          
          <div class="raw text-center">

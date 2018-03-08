@@ -54,8 +54,14 @@ Route::get('/admin',[
     'middleware'=> 'roles',
     'roles'=>  ['admin'] ,
 
-
 	]);
+
+
+Route::post('admin/post/{id}', 'adminController@postApprove');
+Route::get('admin/approve/', 'adminController@postnoApprove');
+
+
+
 Route::post('/add_role',[
     
     'uses'=> 'HomeController@addRole',

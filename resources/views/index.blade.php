@@ -14,10 +14,10 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-   <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+   
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
-    
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     
     <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/font-awesome.css')}}" rel="stylesheet">
@@ -92,7 +92,15 @@
             <li class="active"><a href="photos.html">section</a></li>
             <li class="active"><a href='/profile'>Profile</a></li>
               @if(Auth::user()->hasRole('Admin'))
-            <li class="active"><a href="/admin">Admin</a></li>
+     <div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Admin minu
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="/admin">Users</a></li>
+    <li><a href="admin/approve/">poblication</a></li>
+    <li><a href="#">exp</a></li>
+  </ul>
+</div>
               @endif
           </ul>
         </div><!--/.nav-collapse -->

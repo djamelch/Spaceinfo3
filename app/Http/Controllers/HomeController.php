@@ -114,6 +114,8 @@ class HomeController extends Controller
           
          return redirect('/home');
     }
+
+    
     public function download($id )
     {
        $file=File::find($id);
@@ -125,7 +127,7 @@ class HomeController extends Controller
        $file_path= public_path(). "/storage/files/".$filename;
 
        $headers = array(
-        'Content-Type: ' . mime_content_type( $file_path ),
+        'Content-Type: ' . mime_content_type( $file_path ) ,
     );
     return response()->download($file_path,$filename,$headers);
     }
