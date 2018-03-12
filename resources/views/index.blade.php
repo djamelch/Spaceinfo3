@@ -14,10 +14,10 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-   
+   <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    
     
     <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/font-awesome.css')}}" rel="stylesheet">
@@ -84,14 +84,19 @@
                         @endif
                     </ul>
                 </div>
-        <div id="navbar" class="collapse navbar-collapse">
+      
+        
+        <div class="col-md-6">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/home">Home</a></li>
             
-            <li class="active"><a href="groups.html">Group</a></li>
-            <li class="active"><a href="photos.html">section</a></li>
+            
             <li class="active"><a href='/profile'>Profile</a></li>
-              @if(Auth::user()->hasRole('Admin'))
+            </ul>
+          
+          
+       
+            @if(Auth::user()->hasRole('Admin'))
      <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Admin minu
   <span class="caret"></span></button>
@@ -101,9 +106,8 @@
     <li><a href="#">exp</a></li>
   </ul>
 </div>
-              @endif
-          </ul>
-        </div><!--/.nav-collapse -->
+       @endif
+        </div>
       </div>
     </nav>
             
@@ -123,9 +127,9 @@
 
     <!-- Bootstrap Core JavaScript -->
      
-    <script src="{{ asset ('assets/js/bootstrap.min.js')}}"></script>
+   
     <script src="{{ asset ('assets/js/bootstrap.js')}}"></script>
-    
+     <script src="{{ asset ('assets/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset ('assets/js/ekko-lightbox.js')}}"></script>
 
 </body>

@@ -57,8 +57,11 @@ Route::get('/admin',[
 	]);
 
 
-Route::post('admin/post/{id}', 'adminController@postApprove');
+//Route::post('admin/postaccpet/{id}', 'adminController@postApprove');
+Route::post('admin/postaccept/{id}', 'adminController@postApprove')->name('posts.approve');
 Route::get('admin/approve/', 'adminController@postnoApprove');
+Route::get('admin/{post}','adminController@post');
+Route::delete('admin/{id}/distroy','adminController@destroy');
 
 
 

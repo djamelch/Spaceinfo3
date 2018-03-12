@@ -2,7 +2,7 @@
 
 @section('content')
 
- <div class="container">
+
    <div class="row">
       
     <div class="col-md-12">
@@ -18,22 +18,26 @@
                 
              </tr>
              @foreach($posts as $post)
+             @if($post->accpet===0)
              <tr>
 
              <th>{{$post->id}}</th>
              <th>{{$post->title}}</th>
-             <th><a>tses post</a></th>
+             <th><a class="btn btn-primary" href="/admin/{{$post->id}}">view post <span class="glyphicon glyphicon-chevron-right"></span></a></th>
 
-
-             <form method='post' action="{{url('admin/postaccpet/'.$post -> id)}}">
+      
+             <form method='post' action="{{route('posts.approve', $post->id)}}">
              {{ csrf_field () }}
+             
                 <input type="hidden" name="id" value='{{$post->id}}'>
+
                 <td> 
                  <button type="submit" class="btn btn-success">accpte_post</button>
                 </td>
 
              </tr> 
-             <form>
+             </form>
+             @endif
              @endforeach
     </table>
                  
