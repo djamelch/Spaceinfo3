@@ -7,6 +7,9 @@ use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -47,6 +50,21 @@ class RegisterController extends Controller
         ]);
     }
 
+    protected function register(Request $request)
+    {
+        $input = $request->all();
+        $validator = $this->validator($input);
+
+        if ($validator->passes()) {
+            $thisUser = $this->create($input)->toArray();
+            return redirect()->back()->with('msg' , '<div role="alert" class="alert alert-success">Well Done. Please wait untile admin to approve your request. </div>');
+  
+        }
+
+        return redirect()->back()->with('msg' , '<div role="alert" class="alert alert-danger">'.$validator->errors()->first().'</div>');
+
+    }
+     
     /**
      * Create a new user instance after a valid registration.
      *

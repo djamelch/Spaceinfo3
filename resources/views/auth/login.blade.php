@@ -8,6 +8,9 @@
                 <div class="panel-heading">Login</div>
 
                 <div class="panel-body">
+                    @if (session('msg'))
+                        {!! session('msg') !!}
+                    @endif
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 

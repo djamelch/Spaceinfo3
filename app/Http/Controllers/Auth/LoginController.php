@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -36,4 +39,26 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        $status = User::where('email', '=', $request->email)->first();
+
+
+            if($status->status == 0) {
+                
+            return redirect()->back()->with('msg' , '<div role="alert" class="alert alert-danger"> Please wait admin to activate your account to continue</div>');
+
+            } else {
+                if ($this->attemptLogin($request)) {
+                    return $this->sendLoginResponse($request);
+                }
+             }
+
+
+        return $this->sendFailedLoginResponse($request);
+    }
+
 }
