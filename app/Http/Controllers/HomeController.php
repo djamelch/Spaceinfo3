@@ -151,8 +151,7 @@ class HomeController extends Controller
          //tahdid adwar 
      public function addRole (Request $request)
     {
-        $user=User::where('id',$request['id'])->first();//jibli user li id ta3ah hiya id li jaya f request
-        //$user->roles()->detach();
+        $user=User::where('id',$request['id'])->first(); 
 
         if($request['role_user'])
         {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
 use DB;
 
 class adminController extends Controller
@@ -12,9 +13,9 @@ class adminController extends Controller
 
     public function postnoApprove()
     {
-    	 $posts = Post::all();
-    	 //  return view('content.postno','posts' => $posts) );
-    	  return view ('content.postno',array('posts' => $posts));
+       $posts = Post::all();
+       //  return view('content.postno','posts' => $posts) );
+        return view ('content.postno',array('posts' => $posts));
     }
 
 
@@ -33,6 +34,7 @@ class adminController extends Controller
    }
 
 
+
     public function post(Post $post)
     {
      // $post=Post::where('id',$request['id'])->first();
@@ -48,4 +50,25 @@ class adminController extends Controller
     $post->delete();
     return redirect('admin/approve/');
   }
+
+   public function usernoApprove()
+    {
+       $users =User::all();
+       //  return view('content.postno','posts' => $posts) );
+        return view ('content.newuser',array('users' => $users));
+    }
+
+  public function userApprove(Request $request)
+   {
+    
+  // $post = Post::findOrFail($id);
+      $user=User::where('id',$request['id'])->first();
+      if($user)
+       {
+        $user->status = 1;
+        $user->save();
+       
+      } 
+      return redirect('admin/approve/user');
+   }
 }

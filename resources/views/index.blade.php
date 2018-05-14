@@ -98,12 +98,12 @@
        
             @if(Auth::user()->hasRole('Admin'))
      <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Admin minu
+  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Admin menu
   <span class="caret"></span></button>
   <ul class="dropdown-menu">
     <li><a href="/admin">Users</a></li>
     <li><a href="admin/approve/">poblication</a></li>
-    <li><a href="#">exp</a></li>
+    <li><a href='admin/approve/user'>new user</a></li>
   </ul>
 </div>
        @endif

@@ -39,6 +39,9 @@ Route::get('/profile', 'UserController@profile');
 Route::post('/profile', 'UserController@update_avatar');
  //home
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/newuser', 'adminController@newuser')->name('newuser');
+
 Route::post('/home/store', 'HomeController@store');
 Route::get('/home/{url_file}/download', 'HomeController@download');
 
@@ -54,14 +57,17 @@ Route::get('/admin',[
     'middleware'=> 'roles',
     'roles'=>  ['admin'] ,
 
-	]);
+    ]);
 
 
 //Route::post('admin/postaccpet/{id}', 'adminController@postApprove');
 Route::post('admin/postaccept/{id}', 'adminController@postApprove')->name('posts.approve');
+Route::post('admin/useraccept/{id}', 'adminController@userApprove')->name('users.approve');
 Route::get('admin/approve/', 'adminController@postnoApprove');
+Route::get('admin/approve/user', 'adminController@usernoApprove');
 Route::get('admin/{post}','adminController@post');
 Route::delete('admin/{id}/distroy','adminController@destroy');
+
 
 
 
@@ -73,4 +79,4 @@ Route::post('/add_role',[
     'roles'=>  ['admin'] ,
 
 
-	]);
+    ]);
