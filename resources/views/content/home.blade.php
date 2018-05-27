@@ -18,7 +18,7 @@
                       {{ csrf_field () }}
                   <div class="form-group">
                       <label for="title">Title:</label>
-                       <input type="text" class="form-control" name="title" placeholder="add titel">
+                       <input type="text" class="form-control" name="title" placeholder="add title">
                   </div>
 
                   <div class="form-group">
@@ -58,8 +58,8 @@
 
                      
                   <div class="col-sm-2">
-                    <a class="post-avatar thumbnail" href="/profile"><img src="storage/images/{{$post->user->avatar}}" class="text-center"> {{$post->user->name}}</a>
-                    <div class="likes text-center">7 Likes</div><!--col-sm-2 ends -->
+                    <a class="post-avatar thumbnail" href="/profile"><img src="storage/images/{{$post->user->avatar}}" class="text-center"><h4> {{$post->user->name}}</h4></a>
+                    <!--col-sm-2 ends -->
                   </div>
 
                    @if (count($errors) > 0)

@@ -14,9 +14,8 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-   <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/css/bootstrap.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     
     
     <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -58,10 +57,11 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position:relative; padding-left:50px;">
-    <img src="storage/images/{{ Auth::user()->avatar }}" style="width:35px; height: 40px; position:absolute; top:10px; left:10px; border-radius:70%">
-    {{ Auth::user()->name }} <span class="caret"></span>
-        </a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"   aria-expanded="false" style="position:relative; padding-left:90px;">
+                                   <img src="storage/images/{{ Auth::user()->avatar }}" style="width:70px; height: 80px; position:absolute; top:10px; left:10px; border-radius:70%">
+                                    <u><h5>{{ Auth::user()->name }}</h5></u>
+                                     <span class="caret"></span>
+                                </a>
                          <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -87,26 +87,25 @@
       
         
         <div class="col-md-6">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav navbar-left">
             <li class="active"><a href="/home">Home</a></li>
             
-            
             <li class="active"><a href='/profile'>Profile</a></li>
-            </ul>
-          
-          
-       
+          </ul>
+
             @if(Auth::user()->hasRole('Admin'))
-     <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Admin menu
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><a href="/admin">Users</a></li>
-    <li><a href="admin/approve/">poblication</a></li>
-    <li><a href='admin/approve/user'>new user</a></li>
-  </ul>
-</div>
-       @endif
+              <!-- Example single danger button -->
+              <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Admin Menu
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="/admin">Users</a>
+                  <a class="dropdown-item" href="/admin/approve">Publication</a>
+                  <a class="dropdown-item" href="/admin/approve/user">New User</a>
+                </div>
+              </div>
+            @endif
         </div>
       </div>
     </nav>

@@ -1,8 +1,9 @@
+
 body {
 
 }
 header {
-  background-image: linear-gradient(#04519B, #044687 60%, #033769);
+  background-image:#3097d1;
   color: #FFF;
   min-height: 100px;
   padding-top: 25px;
@@ -147,3 +148,10 @@ footer {
     outline: none;
     cursor: inherit;
 }
+.centrage{
+  margin-top: 05%;
+}
+.centrag{
+  margin-left:  40%;
+}
+
