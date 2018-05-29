@@ -82,7 +82,7 @@
         <label for="password-confirm">Confirm Password</label>
       </div>
        <div class="form-label-group">
-          <select class="custom-select d-block w-100" id="levelclass">
+          <select class="custom-select d-block w-100" id="levelclass" name='level'>
                       <option value="">Choose Your Level Class</option>
                       <option>1st Class</option>
                       <option>2nd Class</option>
@@ -93,7 +93,7 @@
       </div>
 
       <div class="form-label-group">
-          <select class="custom-select d-block w-100" id="section">
+          <select class="custom-select d-block w-100" id="section"  name='section'>
                       <option value="">Choose Your Section</option>
                       <option>Section A</option>
                       <option>Section B</option>
@@ -102,7 +102,7 @@
       </div>
 
       <div class="form-label-group">
-          <select class="custom-select d-block w-100" id="group">
+          <select class="custom-select d-block w-100" id="group"   name='group'>
                       <option value="">Choose Your Group</option>
                       <option>1st Group</option>
                       <option>2nd Group</option>

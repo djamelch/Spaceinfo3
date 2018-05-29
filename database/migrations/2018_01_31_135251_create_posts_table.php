@@ -20,9 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('url_file');
             $table->integer('user_id')->unsigned ();
             $table->foreign('user_id')->references('id')->on ('users'); 
-            $table->enum('level', ['1', '2', '3', '4','5']);
-            $table->enum('group', ['1', '2', '3', '4','all']);
-            $table->enum('section', ['A','B']);
+         
             $table->timestamps();
 
         });

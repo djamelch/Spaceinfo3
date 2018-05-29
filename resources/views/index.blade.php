@@ -10,7 +10,7 @@
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Spaceinfo</title>
+    <title>Spaceinfo ENS</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -43,6 +43,9 @@
                     
 
         </div>
+
+
+
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
@@ -51,6 +54,8 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+
+
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
@@ -58,11 +63,20 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"   aria-expanded="false" style="position:relative; padding-left:90px;">
-                                   <img src="storage/images/{{ Auth::user()->avatar }}" style="width:70px; height: 80px; position:absolute; top:10px; left:10px; border-radius:70%">
-                                    <u><h5>{{ Auth::user()->name }}</h5></u>
-                                     <span class="caret"></span>
+                                <img src="storage/images/{{ Auth::user()->avatar }}" style="width:70px; height: 80px; position:absolute; top:10px; left:10px; border-radius:70%">
+
+
+                                <u>
+                                <h5>
+                                {{ Auth::user()->name }}
+                                </h5> 
+                                </u>
+
+                                <span class="caret"></span>
                                 </a>
-                         <ul class="dropdown-menu" role="menu">
+
+
+                                <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -74,16 +88,21 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+
                                     </li>
                                 </ul>
+
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{{ url('/profile') }}"><i class="fa fa-btn fa-user"></i>Profile</a></li>
                                     <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                                 </ul>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
+
+                             </li>
+                           @endif
+                         </ul>
+         </div>
+
+
       
         
         <div class="col-md-6">
@@ -109,15 +128,20 @@
         </div>
       </div>
     </nav>
+
+
             
+
      @yield('content')
 
 
-    <footer>
-      <div class="container">
-        <p>Copyright by groupe Spaceinfo &copy; <?php echo date("Y"); ?></p>
-      </div>
-    </footer>
+
+
+           <footer>
+              <div class="container">
+                 <p>Copyright by groupe Spaceinfo &copy; <?php echo date("Y"); ?></p>
+              </div>
+           </footer>
 
 
     <script src="{{ asset('js/app.js') }}"></script>

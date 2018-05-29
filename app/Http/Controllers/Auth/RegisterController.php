@@ -76,8 +76,11 @@ class RegisterController extends Controller
         $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'level' => $data['level'],
+            'section' => $data['section'],
+            'group' => $data['group'],
             'password' => bcrypt($data['password']),
-            'accpet' => $data['accpet'],
+            
         ]);
 
         
