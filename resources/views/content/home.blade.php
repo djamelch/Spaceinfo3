@@ -111,9 +111,7 @@
              <div class="col-sm-10">
 
                   	      <!-- posts 
-                  	       Auth::user()->group
-                     Auth::user()->lavel
-                     Auth::user()->section -->
+                  	       -->
 
                     <h2>
                       <a href="/posts/{{$post->id}}">{{$post -> title}}</a>
