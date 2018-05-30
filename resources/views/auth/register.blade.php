@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Cover Template for Bootstrap</title>
+    <title>Spaceinfo ENS</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -55,7 +55,29 @@
         <label for="name">Name</label>
       </div>
 
-        <input  type="hidden" class="form-control" name="accpet" >
+       <div class="form-label-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+        <input  id="first_name" name="first_name" value="{{ old('first_name') }}" type="text" class="form-control" placeholder="Enter Your" required autofocus>
+        @if ($errors->has('first_name'))
+              <span class="help-block">
+                <strong>{{ $errors->first('first_name') }}</strong>
+             </span>
+          @endif
+        <label for="First Name"> First Name</label>
+      </div>
+
+
+       
+      <div class="form-label-group{{ $errors->has('matricule') ? ' has-error' : '' }}">
+        <input  id="matricule" name="matricule" value="{{ old('matricule') }}" type="text" class="form-control" placeholder="Enter Your" required autofocus>
+        @if ($errors->has('matricule'))
+              <span class="help-block">
+                <strong>{{ $errors->first('matricule') }}</strong>
+             </span>
+          @endif
+        <label for="First Name"> Matricule</label>
+      </div>
+
+        
 
       <div class="form-label-group{{ $errors->has('email') ? ' has-error' : '' }}">
         <input type="email" name="email" value="{{ old('email') }}" id="email" class="form-control" placeholder="Email address" required autofocus>

@@ -22,6 +22,8 @@
 
                       {{ csrf_field () }}
 
+                      <input type="hidden" value="1" name="public"/>
+
                       <div class="form-group">
                           <label for="title">Title:</label>
                             <input type="text" class="form-control" name="title" placeholder="add title">
@@ -81,15 +83,16 @@
           @if($post->accpet === 1)
 
                  <!--userAuth is User  -->
-         @if(Auth::user()->hasRole('User'))
+           @if((Auth::user()->hasRole('User'))&& (Auth::user()->level !=null)&&(Auth::user()->section !=null)&&(Auth::user()->group !==null))
 
 
+         
 
 
 
 
            @if($post->for_level === 1)
-               @if($post->user->level === Auth::user()->level)
+               @if($post->user->level === (Auth::user()->level))
              
 	               <div class="panel panel-default post">
 	                 <div class="panel-body">
@@ -545,6 +548,8 @@
         
 
          @endif
+
+         @endif   <!-- end accpet -->
           
          @else    <!-- userAuth is admin or editor-->
 
@@ -694,7 +699,7 @@
 
 
          @endif   <!--  --> 
-           @endif   <!-- end accpet --> 
+            
         @endforeach  
 
 

@@ -65,6 +65,7 @@ class HomeController extends Controller
           $post       = new Post;   
           $post->title=request ("title");
           $post->body = request ("body");
+          $post->public = request ("public");
           $post->user_id=Auth::user()->id;
           $post->for_level = request ("level");
           $post->for_section = request ("section");
