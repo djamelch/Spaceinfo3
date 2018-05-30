@@ -14,7 +14,7 @@ class AddYearToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-             $table->string('level');
+             $table->string('level')->nullable($value = true);
         });
     }
 

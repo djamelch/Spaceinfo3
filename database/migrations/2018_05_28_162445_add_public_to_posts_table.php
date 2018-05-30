@@ -14,7 +14,7 @@ class AddPublicToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-             $table->boolean('public')->default('0');
+             $table->boolean('public')->nullable($value = true);
         });
     }
 

@@ -59,6 +59,15 @@ Route::get('/admin',[
 
     ]);
 
+Route::post('/add_role',[
+    
+    'uses'=> 'HomeController@addRole',
+    'as'  =>'content.admin' ,
+    'middleware'=> 'roles',
+    'roles'=>  ['admin'] ,
+
+
+    ]);
 
 //Route::post('admin/postaccpet/{id}', 'adminController@postApprove');
 Route::post('admin/postaccept/{id}', 'adminController@postApprove')->name('posts.approve');
@@ -71,12 +80,4 @@ Route::delete('admin/{id}/distroy','adminController@destroy');
 
 
 
-Route::post('/add_role',[
-    
-    'uses'=> 'HomeController@addRole',
-    'as'  =>'content.admin' ,
-    'middleware'=> 'roles',
-    'roles'=>  ['admin'] ,
 
-
-    ]);

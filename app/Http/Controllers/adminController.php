@@ -22,7 +22,7 @@ class adminController extends Controller
    public function postApprove(Request $request)
    {
     
-  // $post = Post::findOrFail($id);
+  
       $post=Post::where('id',$request['id'])->first();
       if($post)
        {
@@ -37,8 +37,7 @@ class adminController extends Controller
 
     public function post(Post $post)
     {
-     // $post=Post::where('id',$request['id'])->first();
-     // $post =DB::table('posts')->find(); 
+     
 
       $post=Post::where('id',$post['id'])->first();
       return view ('content.post', array('post' => $post));

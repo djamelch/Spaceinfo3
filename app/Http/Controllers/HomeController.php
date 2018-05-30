@@ -61,12 +61,14 @@ class HomeController extends Controller
 ]);
 
    
-        
+          
           $post       = new Post;   
           $post->title=request ("title");
           $post->body = request ("body");
           $post->user_id=Auth::user()->id;
-      
+          $post->for_level = request ("level");
+          $post->for_section = request ("section");
+
           $post->save(); 
 
    
@@ -135,11 +137,7 @@ class HomeController extends Controller
 
 
   
-       // if ($request->hasFile('url')) 
-       // {
-         //    $post->url = $request ->url->store('images');
-       // }
-       // page admin
+       
     public function admin ()
     {
         $users=User::all();
@@ -151,7 +149,10 @@ class HomeController extends Controller
          //tahdid adwar 
      public function addRole (Request $request)
     {
-        $user=User::where('id',$request['id'])->first(); 
+      
+
+        $user=User::where('email',$request['email'])->first(); 
+        $user->roles()->detach();
 
         if($request['role_user'])
         {

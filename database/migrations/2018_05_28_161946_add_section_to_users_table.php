@@ -14,7 +14,7 @@ class AddSectionToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-             $table->string('section');
+             $table->string('section')->nullable($value = true);
         });
     }
 

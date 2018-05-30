@@ -17,7 +17,11 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('body');
-            $table->string('url_file');
+
+            $table->boolean('for_group')->default('1');
+            $table->boolean('for_section')->nullable($value = true);
+            $table->boolean('for_level')->nullable($value = true);
+
             $table->integer('user_id')->unsigned ();
             $table->foreign('user_id')->references('id')->on ('users'); 
          

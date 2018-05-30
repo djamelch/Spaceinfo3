@@ -14,7 +14,7 @@ class AddGroupToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('group');
+            $table->string('group')->nullable($value = true);
         });
     }
 
