@@ -239,7 +239,7 @@
                  @endif
          @else
           @if($post->for_section === 1)
-          	@if( ($post->user->level === Auth::user()->level) && ($post->user->section === Auth::user()->secton) )
+          	@if( ($post->user->level === Auth::user()->level) && ($post->user->section === Auth::user()->section) )
           		<!-- show posts-->
                 <div class="panel panel-default post">
 	                 <div class="panel-body">
