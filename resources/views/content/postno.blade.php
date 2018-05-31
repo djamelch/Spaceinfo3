@@ -18,7 +18,7 @@
                 
              </tr>
              @foreach($posts as $post)
-             @if($post->accpet===0 && public === null)
+             @if(($post->accpet===0) && ($post->public === null))
              <tr>
 
              <th>{{$post->id}}</th>

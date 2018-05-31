@@ -21,7 +21,7 @@
                 <th>admin</th>
              </tr>
          @foreach($users as $user)
-           <form method='post' action='/add_role'>
+           <form method='post' action="{{url('add_role/'.$user->id)}}">
                 {{ csrf_field () }}
 
                     <input type="hidden" name="email" value='{{$user->email}}'>

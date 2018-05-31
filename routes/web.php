@@ -59,7 +59,7 @@ Route::get('/admin',[
 
     ]);
 
-Route::post('/add_role',[
+Route::post('/add_role/{id}/',[
     
     'uses'=> 'HomeController@addRole',
     'as'  =>'content.admin' ,
