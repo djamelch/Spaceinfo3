@@ -23,9 +23,9 @@
              </tr>
              @foreach($posts as $post)
 
-               @if($post->accpet===0 && $post->public !== 1)
+               @if(($post->accpet===0) && ($post->user->public != 1))
 
-                @if(($post->accpet===0) && ($post->public === null))
+               
 
                 <tr>
 
@@ -50,6 +50,7 @@
              </tr> 
              </form>
              @endif
+           
              @endforeach
     </table>
                  

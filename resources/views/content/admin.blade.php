@@ -23,6 +23,7 @@
          @foreach($users as $user)
            <form method='post' action="{{url('add_role/'.$user->id)}}">
                 {{ csrf_field () }}
+                
 
                     <input type="hidden" name="id" value='{{$user->id}}'>
                <tr>
@@ -42,9 +43,27 @@
                   <td>
                     <input type ='checkbox' name='role_admin' onchange="this.form.submit()" {{$user->hasRole('Admin') ? 'checked' : ' '}} > 
                  </td>
+                
+                 </form>
 
+                   <!--delete posts -->
+                  @if(Auth::user())
+                  <td>
+                  ------
+                  </td>
+                  @else
+                  
+                <td>
+                  <form method='POST' action="{{route('users.destroy', $user->id)}}"> 
+                     {{ csrf_field () }}
+                     {{ method_field ('DELETE') }} 
+
+                      <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
+                  </form>
+                 </td>
+                  @endif
                </tr> 
-           <form>
+           
              @endforeach
     </table>
                  

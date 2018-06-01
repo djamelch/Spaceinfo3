@@ -57,14 +57,13 @@
 
        <div class="form-label-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
         <input  id="first_name" name="first_name" value="{{ old('first_name') }}" type="text" class="form-control" placeholder="Enter Your" required autofocus>
-        @if ($errors->has('first_name'))
+          @if ($errors->has('first_name'))
               <span class="help-block">
                 <strong>{{ $errors->first('first_name') }}</strong>
              </span>
           @endif
-        <label for="First Name"> First Name</label>
+        <label for="first_name">first_name</label>
       </div>
-
 
        
       <div class="form-label-group{{ $errors->has('matricule') ? ' has-error' : '' }}">
@@ -74,7 +73,7 @@
                 <strong>{{ $errors->first('matricule') }}</strong>
              </span>
           @endif
-        <label for="First Name"> Matricule</label>
+        <label for="matricule"> Matricule</label>
       </div>
 
         

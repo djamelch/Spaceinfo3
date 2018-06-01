@@ -70,4 +70,14 @@ class adminController extends Controller
       } 
       return redirect('admin/approve/user');
    }
+
+
+    public function destroy_user (Request $request,$id)
+  {
+     
+    $user=User::find($id);
+    $user->delete();
+
+    return redirect('admin');
+  }
 }

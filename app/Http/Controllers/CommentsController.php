@@ -17,14 +17,13 @@ class CommentsController extends Controller
    public function store(Post $post,User $user)
    {
      
-      // $comment =Comment::create([
-
-       // 'body'   =>request('body'),
-       // 'post_id'=>$post->id,
-       // 'user_id'=>$user->id ,
-
-      // ]);
-
+       $this ->validate(request(),[
+     
+             
+             'body' => 'min:1',
+     
+        ]);
+ 
         $comment     = new Comment;   
       
          $comment->body = request ("body");

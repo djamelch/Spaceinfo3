@@ -14,11 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/posts','PagesController@posts');
-Route::get('/posts/{post}','PagesController@post');
-Route::post('/posts/store','PagesController@store');
-Route::post('/posts/{post}/store','CommentsController@store');
- 
+
 
 
 
@@ -40,15 +36,16 @@ Route::post('/profile', 'UserController@update_avatar');
  //home
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/newuser', 'adminController@newuser')->name('newuser');
+
 
 Route::post('/home/store', 'HomeController@store');
 Route::get('/home/{url_file}/download', 'HomeController@download');
 
-Route::post('/home/{post}/user/{user}/store','CommentsController@store');
+Route::post('/home/{post}/{user}/store','CommentsController@store');
 Route::get('/home/{id}/edit','PostController@edit');
 Route::put('/home/{id}/','PostController@update');
 Route::delete('home/{id}/distroy','PostController@destroy');
+
  //admin
 Route::get('/admin',[
     
@@ -69,13 +66,14 @@ Route::post('/add_role/{id}/',[
 
     ]);
 
-//Route::post('admin/postaccpet/{id}', 'adminController@postApprove');
+
 Route::post('admin/postaccept/{id}', 'adminController@postApprove')->name('posts.approve');
 Route::post('admin/useraccept/{id}', 'adminController@userApprove')->name('users.approve');
 Route::get('admin/approve/', 'adminController@postnoApprove');
 Route::get('admin/approve/user', 'adminController@usernoApprove');
 Route::get('admin/{post}','adminController@post');
-Route::delete('admin/{id}/distroy','adminController@destroy');
+Route::delete('admin/{id_user}/destroy','adminController@destroy_user')->name('users.destroy');
+Route::get('/newuser', 'adminController@newuser')->name('newuser');
 
 
 
