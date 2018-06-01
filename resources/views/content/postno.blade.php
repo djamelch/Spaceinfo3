@@ -11,17 +11,25 @@
    <table class="table table-hover">
             <tr>
 
-                <th>id</th>
+                <th>Name</th>
+                <th>First Name</th>
+                <th>level</th>
+                <th>section</th>
+                <th>group</th>
                 <th>title</th>
                 <th>post</th>
-                <th>accpeter_post</th>
+                
                 
              </tr>
              @foreach($posts as $post)
-             @if($post->accpet===0 && public === null)
+             @if($post->accpet===0 && $post->public !== 1)
              <tr>
 
-             <th>{{$post->id}}</th>
+             <th>{{$post->user->name}}</th>
+             <th>{{$post->user->first_name }}</th>
+             <th>{{$post->user->level}}</th>
+             <th>{{$post->user->section}}</th>
+             <th>{{$post->user->group}}</th>
              <th>{{$post->title}}</th>
              <th><a class="btn btn-primary" href="/admin/{{$post->id}}">view post <span class="glyphicon glyphicon-chevron-right"></span></a></th>
 
@@ -31,9 +39,9 @@
              
                 <input type="hidden" name="id" value='{{$post->id}}'>
 
-                <td> 
+                <!--td 
                  <button type="submit" class="btn btn-success">accpte_post</button>
-                </td>
+                td-->
 
              </tr> 
              </form>

@@ -42,6 +42,7 @@
                   <td>{{Auth::user()->first_name}}</td>
                   <td>{{Auth::user()->email}}</td>
                   <td>{{Auth::user()->matricule}}</td>
+                  
                @if(Auth::user()->level != null)
                   <td>{{Auth::user()->level}}</td>
                   <td>{{Auth::user()->section}}</td>
@@ -110,7 +111,7 @@
                      
                   <div class="col-sm-2">
                     <a class="post-avatar thumbnail" href="/profile"><img src="storage/images/{{$post->user->avatar}}" class="text-center"> {{$post->user->name}}</a>
-                    <div class="likes text-center">7 Likes</div><!--col-sm-2 ends -->
+                    <!--col-sm-2 ends -->
                   </div>
 
                    @if (count($errors) > 0)

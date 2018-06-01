@@ -22,7 +22,7 @@
 
                       {{ csrf_field () }}
 
-                      @if( Auth::user()->hasRole('Editor') && Auth::user()->hasRole('Admin') )
+                      @if( (Auth::user()->hasRole('Editor')) || ( Auth::user()->hasRole('Admin') ))
                       <input type="hidden" value="1" name="public"/>
                       @endif
                       <div class="form-group">
@@ -159,8 +159,7 @@
                            <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
                              {{ csrf_field () }}
                              {{ method_field ('DELETE') }}
-                                  <!--edit posts -->
-                             <a href="{{url('home/'.$post -> id.'/edit')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> modifer</a>
+                                 
                                   <!--delete posts -->
                               <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
                            </form>
@@ -172,7 +171,7 @@
                                 {{ csrf_field () }}
                                 {{ method_field ('DELETE') }}
                                     <!--edit posts -->
-                                <a href="{{url('home/'.$post -> id.'/edit')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> modifer</a>
+                               
                                     <!--delete posts -->
                                 <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
                              </form>
@@ -186,8 +185,6 @@
                    
                     
                  
-
-
 
                           <!-- add commenters-->
                   
@@ -313,8 +310,7 @@
                            <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
                              {{ csrf_field () }}
                              {{ method_field ('DELETE') }}
-                                  <!--edit posts -->
-                             <a href="{{url('home/'.$post -> id.'/edit')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> modifer</a>
+                               
                                   <!--delete posts -->
                               <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
                            </form>
@@ -463,8 +459,7 @@
                            <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
                              {{ csrf_field () }}
                              {{ method_field ('DELETE') }}
-                                  <!--edit posts -->
-                             <a href="{{url('home/'.$post -> id.'/edit')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> modifer</a>
+                                 
                                   <!--delete posts -->
                               <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
                            </form>
@@ -614,8 +609,7 @@
                            <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
                              {{ csrf_field () }}
                              {{ method_field ('DELETE') }}
-                                  <!--edit posts -->
-                             <a href="{{url('home/'.$post -> id.'/edit')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> modifer</a>
+                                 
                                   <!--delete posts -->
                               <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
                            </form>
@@ -704,6 +698,7 @@
           
          @else    <!-- userAuth is admin or editor-->
 
+
             <div class="panel panel-default post">
 	                 <div class="panel-body">
 	                   <div class="row">
@@ -772,8 +767,7 @@
                            <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
                              {{ csrf_field () }}
                              {{ method_field ('DELETE') }}
-                                  <!--edit posts -->
-                             <a href="{{url('home/'.$post -> id.'/edit')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> modifer</a>
+                                 
                                   <!--delete posts -->
                               <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
                            </form>
