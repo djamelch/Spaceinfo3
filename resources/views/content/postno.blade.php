@@ -22,8 +22,12 @@
                 
              </tr>
              @foreach($posts as $post)
-             @if($post->accpet===0 && $post->public !== 1)
-             <tr>
+
+               @if($post->accpet===0 && $post->public !== 1)
+
+                @if(($post->accpet===0) && ($post->public === null))
+
+                <tr>
 
              <th>{{$post->user->name}}</th>
              <th>{{$post->user->first_name }}</th>
