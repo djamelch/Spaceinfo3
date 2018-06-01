@@ -22,13 +22,12 @@
 
                       {{ csrf_field () }}
 
-<<<<<<< HEAD
                       @if( (Auth::user()->hasRole('Editor')) || ( Auth::user()->hasRole('Admin') ))
                       <input type="hidden" value="1" name="public"/>
-=======
+
                       @if(( Auth::user()->hasRole('Editor'))||( Auth::user()->hasRole('Admin') ))
                       <input type="hidden" value="1" name="public">
->>>>>>> dae1f82efbab864c74df14f48c56771eb1e77ec1
+
                       @endif
                       <div class="form-group">
                           <label for="title">Title:</label>
@@ -90,7 +89,7 @@
                   <!--post (Editor and Admin)  -->
                @if($post->public === 1)
                 
-<<<<<<< HEAD
+
                   <div class="panel panel-default post">
 	                 <div class="panel-body">
 	                   <div class="row">
@@ -193,7 +192,7 @@
                       <form class="form-inline" method="POST" action="/home/{{$post->id}}/user/{{Auth::user()->id }}/store">
                            {{ csrf_field () }}
 
-=======
+
                         <div class="panel panel-default post">
                          <div class="panel-body">
                            <div class="row">
@@ -254,7 +253,7 @@
 
 
                                 <!--edit and delete post -->
->>>>>>> dae1f82efbab864c74df14f48c56771eb1e77ec1
+
                         <div class="form-group">
                            <div class="panel-body">
                                        <!--user is admin -->
@@ -346,7 +345,6 @@
            @if((Auth::user()->hasRole('User'))&& (Auth::user()->level !=null)&&(Auth::user()->section !=null)&&(Auth::user()->group !=null))
             @if($post->accpet === 1)
 
-<<<<<<< HEAD
                           <!--edit and delete post -->
                   <div class="form-group">
                      <div class="panel-body">
@@ -381,13 +379,6 @@
                    <!--end posts -->
                    
                     
-                 
-=======
->>>>>>> dae1f82efbab864c74df14f48c56771eb1e77ec1
-
-            
-
-
 
 
                  @if($post->for_level === 1)
@@ -502,7 +493,6 @@
                                 <input type="text"  name="body" class="form-control" id="exampleInputName2" placeholder="Enter Comment">
                               </div>
 
-<<<<<<< HEAD
                           <!--edit and delete post -->
                   <div class="form-group">
                      <div class="panel-body">
@@ -530,13 +520,11 @@
                              </form>
                           @endif
                        @endif
-=======
+
                               <button type="submit" class="btn btn-default">Add</button>
                             </form>
                           </div><!-- comment form ends -->
->>>>>>> dae1f82efbab864c74df14f48c56771eb1e77ec1
 
-                
                             <!-- show comment --> 
 
                        <div class="clearfix"></div>
@@ -882,12 +870,10 @@
          @else
               @if($post->public !== 1)
 
-<<<<<<< HEAD
 
-=======
              <!-- userAuth is admin or editor-->
               
->>>>>>> dae1f82efbab864c74df14f48c56771eb1e77ec1
+
             <div class="panel panel-default post">
 	                 <div class="panel-body">
 	                   <div class="row">
