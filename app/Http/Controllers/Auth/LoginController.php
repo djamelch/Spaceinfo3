@@ -40,25 +40,38 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request)
+    
+
+     protected function credentials(Request $request)
+
     {
-        $this->validateLogin($request);
-
-        $status = User::where('email', '=', $request->email)->first();
+       // return $request->only($this->username(), 'password');
 
 
-            if($status->status == 0) {
-                
-            return redirect()->back()->with('msg' , '<div role="alert" class="alert alert-danger"> Please wait admin to activate your account to continue</div>');
+       return[ 'email'=>$request->{$this->username()},'password'=>$request->password,'status'=>'1'] ;
+    } 
 
-            } else {
-                if ($this->attemptLogin($request)) {
-                    return $this->sendLoginResponse($request);
-                }
-             }
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        $errors = [$this->username() => trans('auth.failed')];
 
+        // Load user from database
+        $user = User::where($this->username(), $request->{$this->username()})->first();
 
-        return $this->sendFailedLoginResponse($request);
+        // Check if user was successfully loaded, that the password matches
+        // and active is not 1. If so, override the default error message.
+        if ($user && \Hash::check($request->password, $user->password) && $user->status != 1) {
+            $errors = [$this->username() => trans('auth.notactivated')];
+        }
+
+        if ($request->expectsJson()) {
+            return response()->json($errors, 422);
+        }
+        return redirect()->back()
+            ->withInput($request->only($this->username(), 'remember'))
+            ->withErrors($errors);
     }
+
+
 
 }

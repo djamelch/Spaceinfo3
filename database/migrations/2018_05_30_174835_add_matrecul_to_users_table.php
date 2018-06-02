@@ -14,7 +14,7 @@ class AddMatreculToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('matricule');
+            $table->string('matricule')->unique()->nullable($value = true);
         });
     }
 

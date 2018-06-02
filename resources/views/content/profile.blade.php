@@ -14,12 +14,13 @@
                 <input type="submit" class="pull-right btn btn-sm btn-primary">
             </form> 
             <hr>
-            <hr>
-             <div >
-              <hr>
+           
+            
+             
             
              <hr>
-             <table class="table table-hover">
+           <div class="table table-responsive">
+            <table class="table table-bordered" id="table">
               <tr>
 
                 
@@ -48,13 +49,47 @@
                   <td>{{Auth::user()->section}}</td>
                   <td>{{Auth::user()->group}}</td>
                @endif
-
+                  
+                  <td>
+           
+            <a href="#" class="edit-modal btn btn-warning btn-sm"  data-title="{{Auth::user()->name}}" data-body="{{Auth::user()->first_name}}">
+              <i class="glyphicon glyphicon-pencil"></i>
+            </a>
+          
+          </td>
                </tr>
 
             </table >
-              
+               
               <hr>
-            
+
+              <!-- Modal Form Edit and Delete Post -->
+<div id="myModal"class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" role="modal">
+        
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="name">Name</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="t">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-2"for="first_name">First Name</label>
+            <div class="col-sm-10">
+            <input type="name" class="form-control" id="b">
+            </div>
+          </div>
+          </div>
+          </div>
+          </div></div>
              <hr>
 
 

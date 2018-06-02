@@ -45,8 +45,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'matricule'=>'required|unique:users|max:9|min:9',
         ]);
     }
 
@@ -71,13 +73,16 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {
+       
+
         $user=User::create([
+
             'name' => $data['name'],
-            'first_name' => $data['group'],
+            'first_name' => $data['first_name'],
             'email' => $data['email'],
-            'matricule' => $data['group'],
+            'matricule' => $data['matricule'],
             'level' => $data['level'],
             'section' => $data['section'],
             'group' => $data['group'],
@@ -85,7 +90,20 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             
         ]);
+        /**
+        
 
+          $user= new User;   
+          $user->name=request ("name");
+          $user->first_name = request ("first_name");
+          $user->email = request ("email");
+          $user->matricule=request ("matricule");
+          $user->level = request ("level");
+          $user->section = request ("section");
+          $user->group = request ("group");
+
+          $user->save(); 
+*/
         
 
          // ki ysaje tkon role ta3ah User
