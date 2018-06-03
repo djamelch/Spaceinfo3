@@ -41,6 +41,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home/store', 'HomeController@store');
 Route::get('/home/{url_file}/download', 'HomeController@download');
 
+Route::get('/home/posts/{post}','PostController@post');
 Route::post('/home/{post}/{user}/store','CommentsController@store');
 Route::get('/home/{id}/edit','PostController@edit');
 Route::put('/home/{id}/','PostController@update');

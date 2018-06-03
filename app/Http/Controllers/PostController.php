@@ -9,7 +9,15 @@ use App\File;
 
 use Auth;
 class PostController extends Controller
-{
+
+ {
+  public function post($id)
+  {
+   $post=Post::find($id);
+   return view ('content.post',['post'=>$post]) ; 
+  }
+
+
   public function edit($id)
   {
    $post=Post::find($id);

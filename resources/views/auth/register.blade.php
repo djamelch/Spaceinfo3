@@ -66,15 +66,7 @@
       </div>
 
        
-      <div class="form-label-group{{ $errors->has('matricule') ? ' has-error' : '' }}">
-        <input  id="matricule" name="matricule" value="{{ old('matricule') }}" type="text" class="form-control" placeholder="Enter Your" required autofocus>
-        @if ($errors->has('matricule'))
-              <span class="help-block">
-                <strong>{{ $errors->first('matricule') }}</strong>
-             </span>
-          @endif
-        <label for="matricule"> Matricule</label>
-      </div>
+     
 
         
 
@@ -104,10 +96,10 @@
       </div>
 
 
-
+      <div class="form-label-group">
          Student <input type ='radio' id='1' name='1'  onclick="check()" value='student'>
           No Student <input type ='radio' id='2' name='1'  onclick="nocheck()" >
-                  
+      </div>          
          
            <div id="3">
 
@@ -124,7 +116,7 @@
        
        function check()
         {
-          document.getElementById("3").innerHTML ='<div class="form-label-group"><select class="custom-select d-block w-100" id="levelclass" name="level"> <option value="">Choose Your Level Class</option><option>1st Class</option><option>2nd Class</option><option>3rd Class</option> <option>4th Class</option> <option>5th Class</option> </select> </div> <div class="form-label-group"><select class="custom-select d-block w-100" id="section"  name="section"><option value="">Choose Your Section</option><option>Section A</option> <option>Section B</option> <option>Section C</option></select> </div><div class="form-label-group">  <select class="custom-select d-block w-100" id="group"   name="group"> <option value="">Choose Your Group</option> <option>1st Group</option>  <option>2nd Group</option><option>3rd Group</option> <option>4th Group</option></select></div>';
+          document.getElementById("3").innerHTML ='<div class="form-label-group{{ $errors->has("matricule") ? " has-error" : "" }}"><input  id="matricule" name="matricule" value="{{ old("matricule") }}" type="text" class="form-control" placeholder="Enter Your" required autofocus>@if ($errors->has("matricule")) <span class="help-block"><strong>{{ $errors->first("matricule") }}</strong></span>@endif<label for="matricule"> Matricule</label></div><div class="form-label-group"><select class="custom-select d-block w-100" id="levelclass" name="level"> <option value="">Choose Your Level Class</option><option>1st Class</option><option>2nd Class</option><option>3rd Class</option> <option>4th Class</option> <option>5th Class</option> </select> </div> <div class="form-label-group"><select class="custom-select d-block w-100" id="section"  name="section"><option value="">Choose Your Section</option><option>Section A</option> <option>Section B</option> <option>Section C</option></select> </div><div class="form-label-group">  <select class="custom-select d-block w-100" id="group"   name="group"> <option value="">Choose Your Group</option> <option>1st Group</option>  <option>2nd Group</option><option>3rd Group</option> <option>4th Group</option></select></div> ';
        }
         </script>
 

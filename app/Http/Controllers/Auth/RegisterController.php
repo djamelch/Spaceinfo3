@@ -73,10 +73,8 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(Request $request)
+    protected function create(array $data)
     {
-       
-
         $user=User::create([
 
             'name' => $data['name'],
@@ -90,20 +88,7 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             
         ]);
-        /**
-        
 
-          $user= new User;   
-          $user->name=request ("name");
-          $user->first_name = request ("first_name");
-          $user->email = request ("email");
-          $user->matricule=request ("matricule");
-          $user->level = request ("level");
-          $user->section = request ("section");
-          $user->group = request ("group");
-
-          $user->save(); 
-*/
         
 
          // ki ysaje tkon role ta3ah User

@@ -75,28 +75,55 @@
                  <div class="col-md-4">
                      <div class="pointer-border">
   
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                         <div class="col-md-4">
-                           <form class="form-inline" method="POST" action="{{url('admin/'.$post -> id.'/distroy')}}">
+                        
+                         
+                           @if((Auth::user()->hasRole('Admin')) && ((Auth::user()->id)!=($post->user->id)))
+                           <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
 
                              {{ csrf_field () }}
                              {{ method_field ('DELETE') }}
-                       
-                   
-
+                            
                              <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
+
                            </form>
 
-                           <form method='post' action="{{route('posts.approve', $post->id)}}">
+                            <form method='post' action="{{route('posts.approve', $post->id)}}">
                               {{ csrf_field () }}
              
-                             <input type="hidden" name="id" value='{{$post->id}}'>
+                            
                              <button type="submit" class="btn btn-success">accpte_post</button>
          
                            </form>
+                           @else
+
+
+                            @if((Auth::user()->id)===($post->user->id))
+                             <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
+
+                             {{ csrf_field () }}
+                             {{ method_field ('DELETE') }}
+                               <!--edit posts -->
+                              <a href="{{url('home/'.$post -> id.'/edit')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> modifer</a>
+                            
+                             <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
+
+                           </form>
+                           @else 
+                                <!-- post ma rahich at3ah w marahch admin -->
+                           @endif
+                           @endif
+                            @if(Auth::user()->hasRole('Admin'))
+                               <form method='post' action="{{route('posts.approve', $post->id)}}">
+                                {{ csrf_field () }}
+             
+                            
+                                 <button type="submit" class="btn btn-success">accpte_post</button>
+         
+                              </form>
+                             @endif
                          </div>
-                       </div>
-                     </div>
+                       
+                    
                   </div>
 
      </div>
