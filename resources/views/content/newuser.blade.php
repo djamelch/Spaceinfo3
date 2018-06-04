@@ -1,53 +1,88 @@
- @extends('index')
+@extends('index')
 
 @section('content')
 
+     
+     
+           <div class="container bootstrap snippet">
+    
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>User</span></th>
+                                <th><span>Created</span></th>
+                               
+                                <th><span>Email</span></th>
+                               
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($users as $user)
+                                  @if($user->status===0)
+                                <tr>
+                                    <td>
+                                        <img src="storage/images/{{$user->avatar}}" alt="">
+                                        {{$user->name}}&nbsp; {{$user->first_name}} </br>
+                                      <br>
+                                      @if($user->level != null)
+                                    
+                                        <i> {{$user->level}} </i>
+                                        <br>
+                                        <i> {{$user->section}} </i>
+                                        <br>
+                                        <i> {{$user->group}} </i>
+                                    
+                                      @endif
+                                    </td>
+                                    <td>{{$user->created_at}}</td>
+                                   
+                                    <td>
+                                        <a href="#">{{$user->email}}</a>
+                                    </td>
+                                    
+                              
+                                    <td style="width: 15%;">
+                                        
+                                         <form method='POST' action="{{route('users.destroy', $user->id)}}"> <button onclick="this.form.submit()" class="btn btn-danger"  class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Delete this user">
+                                         {{ csrf_field () }}
+                                        {{ method_field ('DELETE') }}
+                                     <div class="btn-group">
+                            
+                                          <i class="fas fa-trash-alt"></i>
+                                      </button> 
+                                         </form>   
+                                        
 
-				 @foreach($users as $user)
-				  @if($user->status===0)
-				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-				
-					<!-- PRICE ITEM -->
-					<div class="panel price panel-grey">
-						<div class="panel-heading arrow_box text-center">
-						<h3>{{$user->name}}</h3>
-						</div>
-						<div class="panel-body text-center">
-							<p class="lead" style="font-size:20px"><strong>{{$user->first_name}}</strong></p>
-						</div>
-						<ul class="list-group list-group-flush text-center">
-							<li class="list-group-item"><i class="icon-ok text-success"></i> {{$user->email}}</li>
-							<li class="list-group-item"><i class="icon-ok text-success"></i> {{$user->matricule}}</li>
-
-							  @if(($user->level != null)&&($user->section != null)&&($user->group != null))
-							<li class="list-group-item"><i class="icon-ok text-success"></i>{{$user->level}}</li>
-							<li class="list-group-item"><i class="icon-ok text-success"></i>{{$user->section}}</li>
-							<li class="list-group-item"><i class="icon-ok text-success"></i>{{$user->group}}</li>
-							@endif
-
-						</ul>
-
-						<div class="panel-footer">
-							 <form method='post' action="{{route('users.approve', $user->id)}}">
-                               {{ csrf_field () }}
+                                          <form method='post' action="{{route('users.approve',$user->id)}}">
+                                            <button onclick="this.form.submit();"   class="btn btn-success"  class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Approve">
+                                              {{ csrf_field () }}
              
-                                 <input type="hidden" name="id" value='{{$user->id}}'>
+                                            <input type="hidden" name="id" value='{{$user->id}}'>
+                                           
+                                          <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                           </button>
+                                         </form>   
+                                        
+                                     
+                                      
 
-                
-                                  <button type="submit" class=" btn btn-lg btn-block btn-primary">accpte</button>          
-                                </form>
-							
-						</div>
-					</div>
-					<!-- /PRICE ITEM -->
-					
-					
-				</div>
+                                    </td>
+                                </tr>
+                                @endif
+                               @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
 
-				 @endif
-				@endforeach
-				
-				
-					
-
+        
  @endsection

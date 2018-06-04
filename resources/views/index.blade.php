@@ -51,7 +51,7 @@
                                 @if(Auth::user()->hasRole('Admin'))
                                 <li><a href="/admin">Users</a></li>
                                 <li><a href="/admin/approve">Publication</a></li>
-                                <li><a href="/admin/approve/user">New User</a></li>
+                                <li><a href="/user">New User</a></li>
                                 @endif
                                 <li><a href="#0" class="placeholder">Placeholder</a></li>
                             </ul>

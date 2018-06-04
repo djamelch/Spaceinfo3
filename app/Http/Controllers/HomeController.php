@@ -151,11 +151,7 @@ class HomeController extends Controller
      public function addRole (Request $request,$id)
     {
       
-
-       
-        $user=User::find($id); 
-
-
+    //dd($request);
         $user=User::find($id);
 
         $user->roles()->detach();
