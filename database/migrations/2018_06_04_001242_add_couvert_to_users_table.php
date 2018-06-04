@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddMatreculToUsersTable extends Migration
+class AddCouvertToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddMatreculToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-             $table->string('matricule');
+           $table->string('couvert')->default('default_couvert.jpg');
         });
     }
 

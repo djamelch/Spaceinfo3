@@ -13,11 +13,13 @@
     <title>Spaceinfo ENS</title>
 
     <!-- Bootstrap Core CSS -->
+    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/bootstrap3.3.1.min.css')}}" rel="stylesheet">
+
     <link href="{{ asset('assets/css/demo.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/reset.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/style_nav.css') }}" rel="stylesheet">
-    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
+   
     
     <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/font-awesome.css')}}" rel="stylesheet">

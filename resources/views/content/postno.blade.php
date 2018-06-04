@@ -3,65 +3,40 @@
 @section('content')
 
 
-   <div class="row">
-      
-    <div class="col-md-12">
-
-               
-   <table class="table table-hover">
-            <tr>
-
-                <th>Name</th>
-                <th>First Name</th>
-                <th>level</th>
-                <th>section</th>
-                <th>group</th>
-                <th>title</th>
-                <th>post</th>
-                
-                
-             </tr>
+   
              @foreach($posts as $post)
 
                @if(($post->accpet===0) && ($post->user->public != 1))
 
                
 
-                <tr>
-
-             <th>{{$post->user->name}}</th>
-             <th>{{$post->user->first_name }}</th>
-             <th>{{$post->user->level}}</th>
-             <th>{{$post->user->section}}</th>
-             <th>{{$post->user->group}}</th>
-             <th>{{$post->title}}</th>
-             <th><a class="btn btn-primary" href="/admin/{{$post->id}}">view post <span class="glyphicon glyphicon-chevron-right"></span></a></th>
-
-      
-             <form method='post' action="{{route('posts.approve', $post->id)}}">
-             {{ csrf_field () }}
-             
-                <input type="hidden" name="id" value='{{$post->id}}'>
-
-                <!--td 
-                 <button type="submit" class="btn btn-success">accpte_post</button>
-                td-->
-
-             </tr> 
-             </form>
-             @endif
-           
-             @endforeach
-    </table>
-                 
-                
-         
-
- </div>
-
-
- </div></div>
+              
  
-
+ <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3" >
+                
+                    <!-- PRICE ITEM -->
+                    <div class="panel price panel-blue" >
+                        <div class="panel-heading arrow_box text-center">
+                        <h3>{{$post->title}}</h3>
+                        </div>
+                        <div class="panel-body text-center">
+                            <p class="lead" style="font-size:20px"><strong>{{$post->body}}</strong></p>
+                        </div>
+                        <ul class="list-group list-group-flush text-center">
+                            <li class="list-group-item"><i class="icon-ok text-info"></i> {{$post->user->name}}</li>
+                            <li class="list-group-item"><i class="icon-ok text-info"></i>{{$post->user->first_name }}</li>
+                            <li class="list-group-item"><i class="icon-ok text-info"></i>{{$post->user->level}} &nbsp; &nbsp;{{$post->user->group}} &nbsp; &nbsp;{{$post->user->group}}</li>
+                        </ul>
+                        <div class="panel-footer">
+                            <a class="btn btn-lg btn-block btn-info" href="/admin/{{$post->id}}"">View Post</a>
+                        </div>
+                    </div>
+                    <!-- /PRICE ITEM -->
+                    
+                    
+                </div>
+                  @endif
+             @endforeach
+               
 
  @endsection
