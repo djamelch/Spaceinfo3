@@ -13,18 +13,19 @@
                     <div class="table-responsive">
                         <table class="table user-list">
                             <thead>
-                                <tr>
-                                <th><span>User</span></th>
-                                <th><span>Created</span></th>
-                                <th class="text-center"><span>Status</span></th>
-                                <th><span>Email</span></th>
-                                <th>&nbsp;</th>
+                                <tr class="success">
+                                <th><span><center>User</center></span></th>
+                                <th><span><center>Created</center></span></th>
+                                <th class="text-center"><span><center>Status</center></span></th>
+                                <th><span><center>Email</center></span></th>
+                                <th><span><center>Delete And Edite</center></span></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($users as $user)
-                                <tr>
+                                <tr >
                                     <td>
+
                                         <img src="storage/images/{{$user->avatar}}" alt="">
                                         {{$user->name}}&nbsp; {{$user->first_name}} </br>
                                         <span class="user-subhead">
@@ -59,14 +60,17 @@
                                       @endif     
                                     </td>
                                     <td>
+                                      <center>
                                         <a href="#">{{$user->email}}</a>
+                                      </center>
                                     </td>
                                     
                               <div class="btn-group">
-                                    <td style="width: 17%;">
-                                       
+                                
+                                    <td style="width:20%;">
+                                       <center>
                                         
-                                        <form method='POST' action="{{route('users.destroy', $user->id)}}">
+                                        <form method='POST' class="form-inline" action="{{route('users.destroy', $user->id)}}">
                                          <button onclick="this.form.submit()"  class="btn btn-danger"  class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Delete this user"> 
                                          {{ csrf_field () }}
                                         {{ method_field ('DELETE') }}
@@ -74,8 +78,8 @@
                                           
                                           <i class="fas fa-trash-alt"></i>
                                        </button>
-                                       @if($user->status===0)
-                                         </form>   
+                                      
+                                         </form>   @if($user->status===0) 
                                           <form method='post' action="{{route('users.approve',$user->id)}}">
                                             <button onclick="this.form.submit();"   class="btn btn-success"  class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Approve">
                                               {{ csrf_field () }}
@@ -99,20 +103,21 @@
                                               
                                               <form method='post' action="{{url('add_role/'.$user->id)}}">
                                               {{ csrf_field () }}
-                                              <button onclick="this.form.submit()"  class="btn btn-success" style="width: 100px;">
+                                              <button onclick="this.form.submit()"  class="btn btn-success" style="width: 130px;" type="button">
                                               <input type="hidden" name="role_admin" value='1' > Admin
                                                </button></form>
                                                 <form method='post' action="{{url('add_role/'.$user->id)}}">
                                               {{ csrf_field () }}
-                                              <button onclick="this.form.submit()"  class="btn btn-info" style="width: 100px;>
+                                              <button onclick="this.form.submit()"  class="btn btn-info" style="width: 130px; type="button">
                                               <input type="hidden" name="role_editor" value='1'> Editor
                                                </button>
                                             </form>
-                                                <form method='post' action="{{url('add_role/'.$user->id)}}">
+                                            <form method='post' action="{{url('add_role/'.$user->id)}}">
                                               {{ csrf_field () }}
-                                              <button onclick="this.form.submit()"  class="btn btn-warning" style="width: 100px;>
+                                              <button onclick="this.form.submit()"  class="btn btn-warning" style="width: 130px; type="button">
                                               <input type="hidden" name="role_user" value='1'> User
-                                               </button></form>
+                                               </button>
+                                             </form>
                                                
                                           
                                          
@@ -120,8 +125,10 @@
                                        </div> 
 
                                     </div>
-                                 
-                                    </td> </div>
+                                     </center>
+                                    </td>
+
+                                 </div>
                                 </tr>
                                @endforeach
                                 

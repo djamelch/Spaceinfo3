@@ -47,11 +47,7 @@
                  </form>
 
                    <!--delete posts -->
-                  @if(Auth::user())
-                  <td>
-                  ------
-                  </td>
-                  @else
+                 
                   
                 <td>
                   <form method='POST' action="{{route('users.destroy', $user->id)}}"> 
@@ -61,7 +57,7 @@
                       <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
                   </form>
                  </td>
-                  @endif
+                 
                </tr> 
            
              @endforeach

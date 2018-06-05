@@ -12,7 +12,7 @@
                     <div class="table-responsive">
                         <table class="table user-list">
                             <thead>
-                                <tr>
+                                <tr class="success">
                                 <th><span>User</span></th>
                                 <th><span>Created</span></th>
                                
@@ -23,7 +23,7 @@
                             <tbody>
                                 @foreach($users as $user)
                                   @if($user->status===0)
-                                <tr>
+                                <tr >
                                     <td>
                                         <img src="storage/images/{{$user->avatar}}" alt="">
                                         {{$user->name}}&nbsp; {{$user->first_name}} </br>
@@ -47,10 +47,11 @@
                               
                                     <td style="width: 15%;">
                                         
-                                         <form method='POST' action="{{route('users.destroy', $user->id)}}"> <button onclick="this.form.submit()" class="btn btn-danger"  class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Delete this user">
-                                         {{ csrf_field () }}
-                                        {{ method_field ('DELETE') }}
-                                     <div class="btn-group">
+                                         <form method='POST' action="{{route('users.destroy', $user->id)}}">
+                                          {{ csrf_field () }}
+                                        {{ method_field ('DELETE') }} <button onclick="this.form.submit()" class="btn btn-danger"  class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Delete this user">
+                                        
+                                     
                             
                                           <i class="fas fa-trash-alt"></i>
                                       </button> 
@@ -58,7 +59,7 @@
                                         
 
                                           <form method='post' action="{{route('users.approve',$user->id)}}">
-                                            <button onclick="this.form.submit();"   class="btn btn-success"  class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Approve">
+                                            <button onclick="this.form.submit();"   class="btn btn-success" class="btn btn-secondary" data-toggle="tooltip" data-placement="right" title="Approve">
                                               {{ csrf_field () }}
              
                                             <input type="hidden" name="id" value='{{$user->id}}'>

@@ -68,7 +68,7 @@ class adminController extends Controller
         $user->save();
        
       } 
-      return redirect('admin/approve/user');
+      return redirect('user');
    }
 
 
