@@ -118,7 +118,7 @@
                                 <!--date posts -->
                           <p>
                               <span class="glyphicon glyphicon-time"></span>
-                              Posted on {{$post->created_at ->toDayDateTimeString()}}
+                              Posted on {{$post->created_at ->diffForHumans($past);}}
                           </p>
                                 <!--body posts -->
                           <div class="bubble">

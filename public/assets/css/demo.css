@@ -1,10 +1,11 @@
     	body{
-    background-image: url("../img/bg1.jpg");
+    /* background-image: url("../img/bg1.jpg"); */
+    background-color: rgb(241, 241, 241);
     background-size: cover;
     background-repeat: repeat;
 }
 .row{
-  margin-top:100px;
+  margin-top:58px;
 }
 .widget {
   position: relative;
@@ -52,7 +53,7 @@
 }
 
 .bg-info {
-  background: #39bbdb;
+  background: #028090;
 }
 
 .widget-top-overflow {
@@ -82,6 +83,7 @@
 
 h3, .h3 {
   font-size: 24px;
+  text-align: center;
 }
 
 .tags>li>a {
@@ -305,13 +307,23 @@ h6, .h6 {
 
 .well-social-post .post-actions {
   margin: 0;
-  background-color: #f6f7f8;
-  border-top-color: #e9eaed;
+  background-color: #FBFAFA;
+  border-top-color: #fdfeff;
 }
 .widget {
   position: relative;
   margin-bottom: 30px;
   padding: 0px 20px;
+  background: #fff;
+  border-radius: 3px;
+}
+.widgett-body>p {
+  color: white;
+}
+.widgett {
+  position: relative;
+  margin-bottom: 30px;
+  padding: 10px 20px;
   background: #fff;
   border-radius: 3px;
 }
@@ -347,12 +359,14 @@ h6, .h6 {
 .widget-top-overflow, .widget-middle-overflow {
   position: relative;
   margin: 0 -20px;
+  background-color: #6E80B2;
 }
 
 .widget-top-overflow>img {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
+
 
 .widget-top-overflow>img, .widget-middle-overflow>img {
   max-width: 100%;
@@ -417,20 +431,23 @@ h6, .h6 {
 }
 
 .fs-mini {
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .text-light {
-  opacity: .8;
+  opacity: 0.8;
 }
-
 .widget>footer {
+  margin: 0 -20px -15px;
+  padding: 30px 20px;
+}
+.widgett>footer {
   margin: 0 -20px -15px;
   padding: 30px 20px;
 }
 
 .bg-body-light {
-  background-color: #f6f6f6;
+  background-color: #FBFAFA;
 }
 
 .post-links {
@@ -445,4 +462,72 @@ h6, .h6 {
   margin:4px;
 }
 
+.drpdn {
+  position: relative;
+  display: inline-block;
+}
 
+.drpdn-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 3;
+}
+
+.drpdn:hover .drpdn-content {
+  display:inline-block;
+}
+
+
+.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+.dropbtnpost {
+  background-color:transparent;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdownpost {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-contentpost {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-contentpost a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-contentpost a:hover {background-color: #f1f1f1}
+
+.dropdownpost:hover .dropdown-contentpost {
+  display: block;
+}
+
+.dropdownpost:hover .dropbtnpost {
+  background-color: #3e8e4100;
+}
+
+.fill {object-fit: fill;}
+.contain {object-fit: contain;}
+.cover {object-fit: cover;}
+.scale-down {object-fit: scale-down;}
+.none {object-fit: none;}

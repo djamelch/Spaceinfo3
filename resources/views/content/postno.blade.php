@@ -2,11 +2,11 @@
 
 @section('content')
 
-
+ <link href="{{asset('assets/css/posts.css')}}" rel="stylesheet">
    
              @foreach($posts as $post)
 
-               @if(($post->accpet===0) && ($post->user->public != 1))
+@if(($post->accpet==0) && ($post->user->public !=1))
 
                
 
@@ -20,15 +20,15 @@
                         <h3>{{$post->title}}</h3>
                         </div>
                         <div class="panel-body text-center">
-                            <p class="lead" style="font-size:20px"><strong>{{$post->body}}</strong></p>
+                            <p class="lead" style="font-size:20px"><strong class="hhhh">{{$post->body}}</strong></p>
                         </div>
                         <ul class="list-group list-group-flush text-center">
                             <li class="list-group-item"><i class="icon-ok text-info"></i> {{$post->user->name}}</li>
                             <li class="list-group-item"><i class="icon-ok text-info"></i>{{$post->user->first_name }}</li>
-                            <li class="list-group-item"><i class="icon-ok text-info"></i>{{$post->user->level}} &nbsp; &nbsp;{{$post->user->group}} &nbsp; &nbsp;{{$post->user->group}}</li>
+                            <li class="list-group-item"><i class="icon-ok text-info"></i>{{$post->user->level}} &nbsp; &nbsp;{{$post->user->section}} &nbsp; &nbsp;{{$post->user->group}}</li>
                         </ul>
                         <div class="panel-footer">
-                            <a class="btn btn-lg btn-block btn-info" href="/admin/{{$post->id}}"">View Post</a>
+                            <a class="btn btn-lg btn-block btn-info" href="/{{$post->id}}"">View Post</a>
                         </div>
                     </div>
                     <!-- /PRICE ITEM -->

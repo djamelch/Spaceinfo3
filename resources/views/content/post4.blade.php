@@ -3,22 +3,20 @@
 
 
 @section('content')
- <link href="{{asset('assets/css/posts.css')}}" rel="stylesheet">
- <!-- Second Post type form (post with pic)-->
-        <div class="col-md-offset-3 col-md-6 col-xs-12">
+
+ <div class="col-md-offset-3 col-md-6 col-xs-12">
                 <section class="widget">
                     <div class="widget-controls">
-                            
+                            <a href="#"></a>
                             <!-- <a href="javascript:void(0)" class="dropbtn" data-widgster="close"> -->
-                                    <div class="dropdownpost">
-                                       @if((Auth::user()->hasRole('Admin')) && ((Auth::user()->id)!=($post->user->id)))
+                                     <div class="dropdownpost">
+                                    	 @if((Auth::user()->hasRole('Admin')) && ((Auth::user()->id)!=($post->user->id)))
                                             <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
                                             <div class="dropdown-contentpost">
                                                 <a href="{{url('home/'.$post -> id.'/edit')}}">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                 </a>
-                                            </div>
                                                  @else
                                                   <!--user is not admin -->
                                                 @if((Auth::user()->id)===($post->user->id))
@@ -30,7 +28,7 @@
                                                 </a>
                                                 <form  method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
                                                 <a href="#">
-                                                   
+                                                	 
                                                    {{ csrf_field () }}
                                                    {{ method_field ('DELETE') }}
                                                     
@@ -43,11 +41,11 @@
                                              @endif
                                             @endif
                                     </div>
-                       
+                        </a>
                     </div>
                     <div class="widget-body">
                         <div class="widget-top-overflow text-white">
-                           @foreach($post->images as $image)
+                        	 @foreach($post->images as $image)
                             <img  class="cover" src="storage/images/{{$image->url_image}}"style="width:800px;height:400px;">
                             @endforeach
                             <!-- <ul class="tags text-white pull-right">
@@ -69,36 +67,18 @@
                                     </div>
                             </div>
                         </div>
-
-                             <h7 class="author "><span class="fw-semi-bold">{{$post->user->name}}</span> {{$post->user->first_name}}</h7>
+                            <h5 class="mb-xs mt-xs"><span class="fw-semi-bold">{{$post->user->name}}</span> {{$post->user->first_name}}</h5>
                             <p class="fs-mini text-muted"><time>{{$post->created_at->diffForHumans()}}</time>
                                  <!-- &nbsp; <i class="fa fa-map-marker"></i> &nbsp; near Amsterdam</p> -->
-                       <style>
-                      
-                       </style>
-                         
-                          <div class="notepaper">
-                            <figure class="quote">
-                                <blockquote class="curly-quotes">
-                                {{$post -> body}}
-                                </blockquote>
-    
-                            </figure>
-                          </div>
-                       
-                          </div>
-
-
-
-                     
-
+                        </div>
+                        <p class="text-light fs-mini m">{{$post -> body}}</p>
                     </div>
                     
 
 
                   
                     <footer class="bg-body-light">
-                       @foreach($post->files as $file)
+                    	 @foreach($post->files as $file)
                                                  
                       <p>{{$file->url_file}}
         <a href="#">
@@ -114,7 +94,13 @@
                                     <i class="far fa-comment-dots"></i>
                                      Comment</a></li>
                             </ul>
-                   
+                    @foreach($post->files as $file)
+                                                 
+                      <a href="{{url('home/'.$file->id.'/download')}}" >
+                        <i class="fal fa-download" ></i>
+                    </a> 
+                     
+                    @endforeach
                              <!-- show comments -->
                          
                            
@@ -156,10 +142,8 @@
 
                         </footer>
                 </section>   
-            
+            </div>
 
     </div>
 
-
-
- @endsection
+    @endsection

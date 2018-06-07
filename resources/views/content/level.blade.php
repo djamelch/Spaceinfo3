@@ -3,8 +3,14 @@
 
 
 @section('content')
- <link href="{{asset('assets/css/posts.css')}}" rel="stylesheet">
- <!-- Second Post type form (post with pic)-->
+
+ 
+    <link href="{{asset('assets/css/posts.css')}}" rel="stylesheet">
+     @foreach($posts as $post)
+
+      @if((Auth::user()->hasRole('User'))&& (Auth::user()->level !=null)&&(Auth::user()->section !=null)&&(Auth::user()->group !=null))&&($post->accpet === 1)&&($post->for_level === 1)&&($post->user->level === (Auth::user()->level))
+
+                      <!-- Second Post type form (post with pic)-->
         <div class="col-md-offset-3 col-md-6 col-xs-12">
                 <section class="widget">
                     <div class="widget-controls">
@@ -161,5 +167,6 @@
     </div>
 
 
-
- @endsection
+               @endif
+               @endforeach
+               @endsection

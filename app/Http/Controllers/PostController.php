@@ -27,9 +27,10 @@ class PostController extends Controller
    public function update (Request $request , $id)
   {
   	 $post=Post::find($id);
-     $post->title=$request->input ("title");
-     $post->body =$request ->input("body");
-      
+
+   //  $post->title=$request->input ("title");
+       $post->body =$request ->input("body");
+       $post->accpet = "0" ;
          
 
    

@@ -30,7 +30,7 @@ class adminController extends Controller
         $post->save();
        
       } 
-      return redirect('admin/approve/');
+      return redirect('post_approve/');
    }
 
 

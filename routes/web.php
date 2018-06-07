@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/level', 'HomeController@level');
+
+Route::post('/section', 'HomeController@section');
+Route::post('/group', 'HomeController@group');
+
 
 
 
@@ -70,9 +75,9 @@ Route::post('/add_role/{id}/',[
 
 Route::post('admin/postaccept/{id}', 'adminController@postApprove')->name('posts.approve');
 Route::post('admin/useraccept/{id}', 'adminController@userApprove')->name('users.approve');
-Route::get('admin/approve/', 'adminController@postnoApprove');
+Route::get('post_approve/', 'adminController@postnoApprove');
 Route::get('/user', 'adminController@usernoApprove');
-Route::get('admin/{post}','adminController@post');
+Route::get('/{post}','adminController@post');
 Route::delete('admin/{id_user}/destroy','adminController@destroy_user')->name('users.destroy');
 Route::get('/newuser', 'adminController@newuser')->name('newuser');
 

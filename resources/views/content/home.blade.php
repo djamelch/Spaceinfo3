@@ -3,7 +3,10 @@
 
 
 @section('content')
-               <!-- errors -->
+
+ 
+    <link href="{{asset('assets/css/posts.css')}}" rel="stylesheet">
+                <!-- errors -->
                       @if (count($errors) > 0)
                              <div class="alert alert-danger">
                                <strong>Whoops!</strong> There were some problems with your input.<br><br> 
@@ -16,57 +19,42 @@
                            @endif
                 <!--end errors -->
 
-                      <!--add posts -->
-     
-   <div class="col-md-offset-3 col-md-6 col-xs-12">
-      <div class="well well-sm well-social-post">
-
-               <!-- begin form -->
-
-           <form method="POST" action="/home/store"  enctype="multipart/form-data">
+ <!-- Post editor -->
+        <div class="col-md-offset-3 col-md-6 col-xs-12">
+                <div class="well well-sm well-social-post">
+            <form method="POST" action="/home/store"  enctype="multipart/form-data">
                    {{ csrf_field () }}
-
-                       <!-- if user is admin or editor -->
+                    <!-- if user is admin or editor -->
                  @if(( Auth::user()->hasRole('Editor'))||( Auth::user()->hasRole('Admin') ))
                    <input type="hidden" value="1" name="public">
                  @endif  <!-- end if user is admin or editor  -->
-
-                      <!-- ul title and body  -->
-                    <ul class="list-inline" id='list_PostActions'>
-                    
-                        <div class="form-group">
-                          <label for="title">Title:</label>
-                            <input type="text" class="form-control" name="title" placeholder="add title">
-                        </div>
-                        
-                        <div class="form-group">
-                           <label for="body">Body:</label>
-                             <textarea class="form-control" name="body"  placeholder="Write on the wall "></textarea>
-                        </div>
-                       
-                    </ul>  <!-- end ul title and body  -->
-                     
-                      <!-- ul image and file  -->
-                    <ul class='list-inline post-actions'>
-                       
-                          <!-- add image -->
-                       <div class="upload-btnn-wrapper">
-                          <i class="fas fa-camera-retro" style="font-size:20px;"></i>
-                           <input type="file" name="images[]" accept="image/*" />
-                      </div>
-                      &nbsp;
-                          <!-- add file -->
-                        <div class="upload-btnn-wrapper">
-                           <i class="fas fa-paperclip" style="font-size:20px;"></i>
-                           <input type="file" name="file" />
-                       </div>
-                        
-                    </ul>  <!-- end ul image and file  -->
-
-                           <!--  ul audience  -->
-                    <ul class='list-inline post-actions'>
+                   <!-- ul title and body  -->
+                <ul class="list-inline" id="list_PostActions">
+                    <li class="active"><a href="#">Update status</a></li>
+                </ul>
+                <textarea name="body" class="form-control" placeholder="What's in your mind?"></textarea>
+                <ul class="list-inline post-actions">
+                  
+                     <li class="hvr-icon-up">
                       
-                      Audience: 
+                        <div class="upload-btnn-wrapper">
+                          <i class="far fa-file-image hvr-icon"></i>
+                          <input type="file" name="images[]" accept="image/*" />
+                        </div>
+                    
+                     </li>
+                        
+                    <li class="hvr-icon-rotate">
+                        <div class="upload-btnn-wrapper">
+                            <i class="fas fa-paperclip hvr-icon"></i>
+                            <input type="file" name="file" >
+                         </div>
+                    </li>
+
+                      @if((Auth::user()->hasRole('User'))&& (Auth::user()->level !=null)&&(Auth::user()->section !=null)&&(Auth::user()->group !==null))
+                     <li class='list-inline post-actions'>
+                      
+                     
                       <div class="form-check form-check-inline">
                            
                           <label class="form-check-label" for="inlineCheckbox1">{{Auth::user()->level}}
@@ -75,7 +63,7 @@
                      
                      
                          
-                          <label class="form-check-label" for="inlineCheckbox2">{{Auth::user()->section}}
+                          <label class="form-check-label">{{Auth::user()->section}}
                               <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="1" name='section'>
                           </label>
                     
@@ -85,147 +73,853 @@
                               <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" checked disabled>
                           </label>
                     </div>
-
-                    </ul>  <!-- end ul Audience  -->
-
-
-                       <button type="submit"  class="btn btn-primary btn-xs pull-right" value="Submit">Share</button>
-                
-
-                 </form>  <!-- end form  -->
                  
-                
-        </div>
-    </div> <!-- End Post editor -->
+                    </li>  <!-- end ul Audience  -->
+                    @endif
+
+                   
+
+                   <li class="pull-right" > <button type="submit"  class="btn btn-primary btn-xs" style="background-color:#189995;" value="Submit">Share</button></li>
+                </ul>
+            </form>
+                </div>
+            </div>                                                          
+        <!-- End Post editor -->
 
   <!-- *********************************************************** -->                
 
-        <!--  *********   show posts ***********  -->
+                <!--show posts -->
                
- @foreach($posts as $post) <!-- begin foreach post  -->
+        @foreach($posts as $post)
           
-
-        <!-- First Post type form -->
-  <div class=" col-md-offset-3 col-md-6 col-xs-12">
-      <section class="widget">
-               
-        <div class="widget-body">
-                <div class="widget-top-overflow windget-padding-md clearfix bg-info ">  
-                        <!-- h3 show the title of the post -->
-                        <a href="/home/posts/{{$post->id}}"><h3 class="mt-sm fw-normal text-white">{{$post -> title}}</h3></a>        
-                </div>
-
-                <div class="post-user mt-n-lg">
-                    <span class="thumb-lg pull-left mr">
-
-                            <!-- show the avatat of the post owner -->
-                        <img class="img-circle" src="storage/images/{{$post->user->avatar}}" class="text-center">
-                    </span>
-
-                        <!-- h5 recover the name of the post sharing -->
-                        <h5 class="mt-sm fw-normal text-white"> {{$post->user->name}} <small class="text-white text-light">{{$post->user->first_name}}</small></h5>
-                        
-                        
-                </div>
-                     <!-- show images -->
-                   @foreach($post->images as $image)
-                        <div class="widget-top-overflow text-white">
-                            <!-- the pic content -->
-                            <img src="storage/images/{{$image->url_image}}">    
-                        </div>
-                   @endforeach
-
-                     <!-- show body -->
-                    <div class="pointer">
-                       <p class="text-light fs-mini m">
-                        {{$post -> body}}
-                      </p>
+                  <!--post (Editor and Admin)  -->
+               @if($post->public === 1)
+                
+                      <!-- Second Post type form (post with pic)-->
+        <div class="col-md-offset-3 col-md-6 col-xs-12">
+                <section class="widget">
+                    <div class="widget-controls">
+                            
+                            <!-- <a href="javascript:void(0)" class="dropbtn" data-widgster="close"> -->
+                                    <div class="dropdownpost">
+                                       @if((Auth::user()->hasRole('Admin')) && ((Auth::user()->id)!=($post->user->id)))
+                                            <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
+                                            <div class="dropdown-contentpost">
+                                                <a href="{{url('home/'.$post -> id.'/edit')}}">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                </a>
+                                            </div>
+                                                 @else
+                                                  <!--user is not admin -->
+                                                @if((Auth::user()->id)===($post->user->id))
+                                                 <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
+                                                <div class="dropdown-contentpost">
+                                                <a href="{{url('home/'.$post -> id.'/edit')}}">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                </a>
+                                                <form  method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
+                                                <a href="#">
+                                                   
+                                                   {{ csrf_field () }}
+                                                   {{ method_field ('DELETE') }}
+                                                    
+                                                    <button type='submit'><i class="fas fa-trash" style="color:red; font-size:11px;"></i></button>
+                                                   
+                                                </a>
+                                              </form>
+                                              
+                                            </div>
+                                             @endif
+                                            @endif
+                                    </div>
+                       
                     </div>
-                   
-                   <!-- show file -->
-                 @foreach($post->files as $file)
-                                                 
-                      <a href="{{url('home/'.$file->id.'/download')}}" class="btn btn-info">
-                        <i class="fa fa-pencil" aria-hidden="true">download file</i></a> 
-                      <hr>
-                 @endforeach 
-
-                   <!-- show time the post -->
-                    <p class="fs-mini text-muted">
-                       <time>
-                         <span class="glyphicon glyphicon-time"> Posted on {{$post->created_at ->toDayDateTimeString()}}</span>                            
-                       </time>
-                    </p>
-                        <!--form edit and delete posts -->
-                   <form class="form-inline" method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
-                       {{ csrf_field () }}
-                       {{ method_field ('DELETE') }}
-                                <!--edit posts -->
-                         <a href="{{url('home/'.$post -> id.'/edit')}}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i> modifer</a>
-
-                                <!--delete posts -->
-                         <button type='submit' class="btn btn-danger"><i class="fa fa-file-image-o" aria-hidden="true"></i> suprimmer</button>
-                    </form>
-                    
-          </div> <!-- end class="widget-body"  -->
-            
-      <!-- end show  the post  -->
-   
-         <footer class="bg-body-light">
-                    <!--ul class="post-links"> 
-                        <-- like and comment footer 
-                        <li><a href="#">1 hour</a></li>
-                        <li><a href="#"><span class="text-danger"><i class="fa fa-heart"></i> Like</span></a></li>
-                        <li><a href="#">Comment</a></li>
-                    ul -->
-
-
-                    <!-- show comments -->
-                  @foreach ($post->comments as $comment)
-                    <ul class="post-comments mt mb-0">
-                        <li> 
-                           <!-- avatar user comment -->
-                            <span class="thumb-xs avatar pull-left mr-sm">
-                                <img class="img-circle" src="storage/images/{{$comment->user->avatar}}" alt="...">
-                            </span>
-                            <!-- body comments -->
-                            <div class="comment-body">
-                                <h6 class="author fw-semi-bold">{{$comment->user->name}} <small class="text-white text-light">{{$comment->user->first_name}}</small></h6>
-                                <p>{{$comment-> body}}</p>
+                    <div class="widget-body">
+                        <div class="widget-top-overflow text-white">
+                           @foreach($post->images as $image)
+                            <img  class="cover" src="storage/images/{{$image->url_image}}"style="width:800px;height:400px;">
+                            @endforeach
+                            <!-- <ul class="tags text-white pull-right">
+                                <li><a href="#">design</a></li>
+                                <li><a href="#">white</a></li>
+                            </ul> -->
+                        </div>
+                        <div class="post-user mt-sm">
+                            <div class="thumb-lg pull-left mr">
+                            <!-- show the avatat of the post owner -->
+                            <div class="drpdn">
+                                    <img src="storage/images/{{$post->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                    <div class="drpdn-content">
+                                      <img src="storage/images/{{$post->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                      <div class="desc">
+                                         {{$post->user->name}}
+                                         {{$post->user->first_name}}
+                                      </div>
+                                    </div>
                             </div>
-                            
-                        </li>
-                            <!-- show time comments -->
-                        <p>
-                          <span class="glyphicon glyphicon-time"> {{$comment->created_at ->toDayDateTimeString()}}</span>                             
-                        </p>
+                        </div>
 
-                        @endforeach    <!-- end show comment -->
-
-                           <!-- add comments -->
-                        <li>
-                             <!-- avatar auth user -->
-                            <span class="thumb-xs avatar pull-left mr-sm">
-                                <img class="img-circle" src="storage/images/{{Auth::user()->avatar}}" alt="...">
-                            </span>
-
-                            
-                              <form  method="POST" action="/home/{{$post->id}}/{{Auth::user()->id }}/store">
-                                 {{ csrf_field () }}
-                                  <div class="comment-body">
-                                        <input  name="body" class="form-control input-sm" type="text" placeholder="Write your comment...">
-                                   </div>
-                               </form>          
-                        </li>
-                    </ul>
-             </footer>
-      </section>
-</div>
+                             <h7 class="author "><span class="fw-semi-bold">{{$post->user->name}}</span> {{$post->user->first_name}}</h7>
+                            <p class="fs-mini text-muted"><time>{{$post->created_at->diffForHumans()}}</time>
+                                 <!-- &nbsp; <i class="fa fa-map-marker"></i> &nbsp; near Amsterdam</p> -->
+                       <style>
+                      
+                       </style>
+                         
+                          <div class="notepaper">
+                            <figure class="quote">
+                                <blockquote class="curly-quotes">
+                                {{$post -> body}}
+                                </blockquote>
+    
+                            </figure>
+                          </div>
+                       
+                          </div>
 
 
-     
-            <!--  --> 
+
+                     
+
+                    </div>
+                    
+
+
+                  
+                    <footer class="bg-body-light">
+                       @foreach($post->files as $file)
+                                                 
+                      <p>{{$file->url_file}}
+        <a href="#">
+          <span class="glyphicon glyphicon-download-alt"></span>
+        </a>
+      </p>
+                    @endforeach
+                            <ul class="post-links">
+
+                                <!-- like and comment footer -->
+
+                                <li><a href="#">
+                                    <i class="far fa-comment-dots"></i>
+                                     Comment</a></li>
+                            </ul>
+                   
+                             <!-- show comments -->
+                         
+                           
+                            <ul class="post-comments mt mb-0">
+                             @foreach ($post->comments as $comment)
+                                <li>
+                                    <div class="thumb-xs avatar pull-left mr-sm">
+                                            <!-- show the avatat of the post owner -->
+                                            <div class="drpdn">
+                                                    <img src="storage/images/{{$comment->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                                    <div class="drpdn-content">
+                                                      <img src="storage/images/{{$comment->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                                      <div class="desc">
+                                                         {{$post->user->name}}<br>
+                                                         {{$post->user->first_name}}
+                                                      </div>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    <div class="comment-body">
+                                        <h6 class="author fw-semi-bold">{{$comment->user->name}} &nbsp; {{$post->user->first_name}} <small>{{$comment->created_at ->diffForHumans()}}</small></h6>
+                                        <p>{{$comment-> body}}</p>
+                                    </div>
+                                </li>
+                                 @endforeach    <!-- end show comment -->
+                                <li>
+                                    <span class="thumb-xs avatar pull-left mr-sm">
+                                        <img class="img-circle" src="storage/images/{{Auth::user()->avatar}}" alt="...">
+                                    </span>
+
+                                    <div class="comment-body">
+                                    <form  method="POST" action="/home/{{$post->id}}/{{Auth::user()->id }}/store">
+                                            {{ csrf_field () }}
+                                        <input class="form-control input-sm" name="body" type="text" placeholder="Write your comment...">
+                                       </form>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </footer>
+                </section>   
             
+
+    </div>
+
+
+              @endif   <!-- end Post Editor and amdin --> 
+         
+                 <!--userAuth is User  -->
+           @if((Auth::user()->hasRole('User'))&& (Auth::user()->level !=null)&&(Auth::user()->section !=null)&&(Auth::user()->group !=null))
+
+            @if($post->accpet === 1)
+
+                 @if($post->for_level === 1)
+                     @if($post->user->level === (Auth::user()->level))
+                   
+                  <!-- Second Post type form (post with pic)-->
+        <div class="col-md-offset-3 col-md-6 col-xs-12">
+                <section class="widget">
+                    <div class="widget-controls">
+                            
+                            <!-- <a href="javascript:void(0)" class="dropbtn" data-widgster="close"> -->
+                                    <div class="dropdownpost">
+                                       @if((Auth::user()->hasRole('Admin')) && ((Auth::user()->id)!=($post->user->id)))
+                                            <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
+                                            <div class="dropdown-contentpost">
+                                                <a href="{{url('home/'.$post -> id.'/edit')}}">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                </a>
+                                            </div>
+                                                 @else
+                                                  <!--user is not admin -->
+                                                @if((Auth::user()->id)===($post->user->id))
+                                                 <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
+                                                <div class="dropdown-contentpost">
+                                                <a href="{{url('home/'.$post -> id.'/edit')}}">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                </a>
+                                                <form  method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
+                                                <a href="#">
+                                                   
+                                                   {{ csrf_field () }}
+                                                   {{ method_field ('DELETE') }}
+                                                    
+                                                    <button type='submit'><i class="fas fa-trash" style="color:red; font-size:11px;"></i></button>
+                                                   
+                                                </a>
+                                              </form>
+                                              
+                                            </div>
+                                             @endif
+                                            @endif
+                                    </div>
+                       
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-top-overflow text-white">
+                           @foreach($post->images as $image)
+                            <img  class="cover" src="storage/images/{{$image->url_image}}"style="width:800px;height:400px;">
+                            @endforeach
+                            <!-- <ul class="tags text-white pull-right">
+                                <li><a href="#">design</a></li>
+                                <li><a href="#">white</a></li>
+                            </ul> -->
+                        </div>
+                        <div class="post-user mt-sm">
+                            <div class="thumb-lg pull-left mr">
+                            <!-- show the avatat of the post owner -->
+                            <div class="drpdn">
+                                    <img src="storage/images/{{$post->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                    <div class="drpdn-content">
+                                      <img src="storage/images/{{$post->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                      <div class="desc">
+                                         {{$post->user->name}}
+                                         {{$post->user->first_name}}
+                                      </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                             <h7 class="author "><span class="fw-semi-bold">{{$post->user->name}}</span> {{$post->user->first_name}}</h7>
+                            <p class="fs-mini text-muted"><time>{{$post->created_at->diffForHumans()}}</time>
+                                 <!-- &nbsp; <i class="fa fa-map-marker"></i> &nbsp; near Amsterdam</p> -->
+                       <style>
+                      
+                       </style>
+                         
+                          <div class="notepaper">
+                            <figure class="quote">
+                                <blockquote class="curly-quotes">
+                                {{$post -> body}}
+                                </blockquote>
+    
+                            </figure>
+                          </div>
+                       
+                          </div>
+
+
+
+                     
+
+                    </div>
+                    
+
+
+                  
+                    <footer class="bg-body-light">
+                       @foreach($post->files as $file)
+                                                 
+                      <p>{{$file->url_file}}
+        <a href="#">
+          <span class="glyphicon glyphicon-download-alt"></span>
+        </a>
+      </p>
+                    @endforeach
+                            <ul class="post-links">
+
+                                <!-- like and comment footer -->
+
+                                <li><a href="#">
+                                    <i class="far fa-comment-dots"></i>
+                                     Comment</a></li>
+                            </ul>
+                   
+                             <!-- show comments -->
+                         
+                           
+                            <ul class="post-comments mt mb-0">
+                             @foreach ($post->comments as $comment)
+                                <li>
+                                    <div class="thumb-xs avatar pull-left mr-sm">
+                                            <!-- show the avatat of the post owner -->
+                                            <div class="drpdn">
+                                                    <img src="storage/images/{{$comment->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                                    <div class="drpdn-content">
+                                                      <img src="storage/images/{{$comment->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                                      <div class="desc">
+                                                         {{$post->user->name}}<br>
+                                                         {{$post->user->first_name}}
+                                                      </div>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    <div class="comment-body">
+                                        <h6 class="author fw-semi-bold">{{$comment->user->name}} &nbsp; {{$post->user->first_name}} <small>{{$comment->created_at ->diffForHumans()}}</small></h6>
+                                        <p>{{$comment-> body}}</p>
+                                    </div>
+                                </li>
+                                 @endforeach    <!-- end show comment -->
+                                <li>
+                                    <span class="thumb-xs avatar pull-left mr-sm">
+                                        <img class="img-circle" src="storage/images/{{Auth::user()->avatar}}" alt="...">
+                                    </span>
+
+                                    <div class="comment-body">
+                                    <form  method="POST" action="/home/{{$post->id}}/{{Auth::user()->id }}/store">
+                                            {{ csrf_field () }}
+                                        <input class="form-control input-sm" name="body" type="text" placeholder="Write your comment...">
+                                       </form>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </footer>
+                </section>   
+            
+
+    </div>
+
+
+               @endif
+          @else
+                 @if($post->for_section === 1)
+                  @if( ($post->user->level === Auth::user()->level) && ($post->user->section === Auth::user()->section) )
+                    <!-- show posts-->
+  <!-- Second Post type form (post with pic)-->
+        <div class="col-md-offset-3 col-md-6 col-xs-12">
+                <section class="widget">
+                    <div class="widget-controls">
+                            
+                            <!-- <a href="javascript:void(0)" class="dropbtn" data-widgster="close"> -->
+                                    <div class="dropdownpost">
+                                       @if((Auth::user()->hasRole('Admin')) && ((Auth::user()->id)!=($post->user->id)))
+                                            <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
+                                            <div class="dropdown-contentpost">
+                                                <a href="{{url('home/'.$post -> id.'/edit')}}">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                </a>
+                                            </div>
+                                                 @else
+                                                  <!--user is not admin -->
+                                                @if((Auth::user()->id)===($post->user->id))
+                                                 <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
+                                                <div class="dropdown-contentpost">
+                                                <a href="{{url('home/'.$post -> id.'/edit')}}">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                </a>
+                                                <form  method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
+                                                <a href="#">
+                                                   
+                                                   {{ csrf_field () }}
+                                                   {{ method_field ('DELETE') }}
+                                                    
+                                                    <button type='submit'><i class="fas fa-trash" style="color:red; font-size:11px;"></i></button>
+                                                   
+                                                </a>
+                                              </form>
+                                              
+                                            </div>
+                                             @endif
+                                            @endif
+                                    </div>
+                       
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-top-overflow text-white">
+                           @foreach($post->images as $image)
+                            <img  class="cover" src="storage/images/{{$image->url_image}}"style="width:800px;height:400px;">
+                            @endforeach
+                            <!-- <ul class="tags text-white pull-right">
+                                <li><a href="#">design</a></li>
+                                <li><a href="#">white</a></li>
+                            </ul> -->
+                        </div>
+                        <div class="post-user mt-sm">
+                            <div class="thumb-lg pull-left mr">
+                            <!-- show the avatat of the post owner -->
+                            <div class="drpdn">
+                                    <img src="storage/images/{{$post->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                    <div class="drpdn-content">
+                                      <img src="storage/images/{{$post->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                      <div class="desc">
+                                         {{$post->user->name}}
+                                         {{$post->user->first_name}}
+                                      </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                             <h7 class="author "><span class="fw-semi-bold">{{$post->user->name}}</span> {{$post->user->first_name}}</h7>
+                            <p class="fs-mini text-muted"><time>{{$post->created_at->diffForHumans()}}</time>
+                                 <!-- &nbsp; <i class="fa fa-map-marker"></i> &nbsp; near Amsterdam</p> -->
+                       <style>
+                      
+                       </style>
+                         
+                          <div class="notepaper">
+                            <figure class="quote">
+                                <blockquote class="curly-quotes">
+                                {{$post -> body}}
+                                </blockquote>
+    
+                            </figure>
+                          </div>
+                       
+                          </div>
+
+
+
+                     
+
+                    </div>
+                    
+
+
+                  
+                    <footer class="bg-body-light">
+                       @foreach($post->files as $file)
+                                                 
+                      <p>{{$file->url_file}}
+        <a href="#">
+          <span class="glyphicon glyphicon-download-alt"></span>
+        </a>
+      </p>
+                    @endforeach
+                            <ul class="post-links">
+
+                                <!-- like and comment footer -->
+
+                                <li><a href="#">
+                                    <i class="far fa-comment-dots"></i>
+                                     Comment</a></li>
+                            </ul>
+                   
+                             <!-- show comments -->
+                         
+                           
+                            <ul class="post-comments mt mb-0">
+                             @foreach ($post->comments as $comment)
+                                <li>
+                                    <div class="thumb-xs avatar pull-left mr-sm">
+                                            <!-- show the avatat of the post owner -->
+                                            <div class="drpdn">
+                                                    <img src="storage/images/{{$comment->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                                    <div class="drpdn-content">
+                                                      <img src="storage/images/{{$comment->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                                      <div class="desc">
+                                                         {{$post->user->name}}<br>
+                                                         {{$post->user->first_name}}
+                                                      </div>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    <div class="comment-body">
+                                        <h6 class="author fw-semi-bold">{{$comment->user->name}} &nbsp; {{$post->user->first_name}} <small>{{$comment->created_at ->diffForHumans()}}</small></h6>
+                                        <p>{{$comment-> body}}</p>
+                                    </div>
+                                </li>
+                                 @endforeach    <!-- end show comment -->
+                                <li>
+                                    <span class="thumb-xs avatar pull-left mr-sm">
+                                        <img class="img-circle" src="storage/images/{{Auth::user()->avatar}}" alt="...">
+                                    </span>
+
+                                    <div class="comment-body">
+                                    <form  method="POST" action="/home/{{$post->id}}/{{Auth::user()->id }}/store">
+                                            {{ csrf_field () }}
+                                        <input class="form-control input-sm" name="body" type="text" placeholder="Write your comment...">
+                                       </form>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </footer>
+                </section>   
+            
+
+    </div>
+
+
+
+            @endif
+          @endif
+          @if($post->for_section != 1)
+            @if (($post->user->level === Auth::user()->level)&&($post->user->section === Auth::user()->section)&&($post->user->group === Auth::user()->group))
+ <!-- Second Post type form (post with pic)-->
+        <div class="col-md-offset-3 col-md-6 col-xs-12">
+                <section class="widget">
+                    <div class="widget-controls">
+                            
+                            <!-- <a href="javascript:void(0)" class="dropbtn" data-widgster="close"> -->
+                                    <div class="dropdownpost">
+                                       @if((Auth::user()->hasRole('Admin')) && ((Auth::user()->id)!=($post->user->id)))
+                                            <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
+                                            <div class="dropdown-contentpost">
+                                                <a href="{{url('home/'.$post -> id.'/edit')}}">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                </a>
+                                            </div>
+                                                 @else
+                                                  <!--user is not admin -->
+                                                @if((Auth::user()->id)===($post->user->id))
+                                                 <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
+                                                <div class="dropdown-contentpost">
+                                                <a href="{{url('home/'.$post -> id.'/edit')}}">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                </a>
+                                                <form  method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
+                                                <a href="#">
+                                                   
+                                                   {{ csrf_field () }}
+                                                   {{ method_field ('DELETE') }}
+                                                    
+                                                    <button type='submit'><i class="fas fa-trash" style="color:red; font-size:11px;"></i></button>
+                                                   
+                                                </a>
+                                              </form>
+                                              
+                                            </div>
+                                             @endif
+                                            @endif
+                                    </div>
+                       
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-top-overflow text-white">
+                           @foreach($post->images as $image)
+                            <img  class="cover" src="storage/images/{{$image->url_image}}"style="width:800px;height:400px;">
+                            @endforeach
+                            <!-- <ul class="tags text-white pull-right">
+                                <li><a href="#">design</a></li>
+                                <li><a href="#">white</a></li>
+                            </ul> -->
+                        </div>
+                        <div class="post-user mt-sm">
+                            <div class="thumb-lg pull-left mr">
+                            <!-- show the avatat of the post owner -->
+                            <div class="drpdn">
+                                    <img src="storage/images/{{$post->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                    <div class="drpdn-content">
+                                      <img src="storage/images/{{$post->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                      <div class="desc">
+                                         {{$post->user->name}}
+                                         {{$post->user->first_name}}
+                                      </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                             <h7 class="author "><span class="fw-semi-bold">{{$post->user->name}}</span> {{$post->user->first_name}}</h7>
+                            <p class="fs-mini text-muted"><time>{{$post->created_at->diffForHumans()}}</time>
+                                 <!-- &nbsp; <i class="fa fa-map-marker"></i> &nbsp; near Amsterdam</p> -->
+                       <style>
+                      
+                       </style>
+                         
+                          <div class="notepaper">
+                            <figure class="quote">
+                                <blockquote class="curly-quotes">
+                                {{$post -> body}}
+                                </blockquote>
+    
+                            </figure>
+                          </div>
+                       
+                          </div>
+
+
+
+                     
+
+                    </div>
+                    
+
+
+                  
+                    <footer class="bg-body-light">
+                       @foreach($post->files as $file)
+                                                 
+                      <p>{{$file->url_file}}
+        <a href="#">
+          <span class="glyphicon glyphicon-download-alt"></span>
+        </a>
+      </p>
+                    @endforeach
+                            <ul class="post-links">
+
+                                <!-- like and comment footer -->
+
+                                <li><a href="#">
+                                    <i class="far fa-comment-dots"></i>
+                                     Comment</a></li>
+                            </ul>
+                   
+                             <!-- show comments -->
+                         
+                           
+                            <ul class="post-comments mt mb-0">
+                             @foreach ($post->comments as $comment)
+                                <li>
+                                    <div class="thumb-xs avatar pull-left mr-sm">
+                                            <!-- show the avatat of the post owner -->
+                                            <div class="drpdn">
+                                                    <img src="storage/images/{{$comment->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                                    <div class="drpdn-content">
+                                                      <img src="storage/images/{{$comment->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                                      <div class="desc">
+                                                         {{$post->user->name}}<br>
+                                                         {{$post->user->first_name}}
+                                                      </div>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    <div class="comment-body">
+                                        <h6 class="author fw-semi-bold">{{$comment->user->name}} &nbsp; {{$post->user->first_name}} <small>{{$comment->created_at ->diffForHumans()}}</small></h6>
+                                        <p>{{$comment-> body}}</p>
+                                    </div>
+                                </li>
+                                 @endforeach    <!-- end show comment -->
+                                <li>
+                                    <span class="thumb-xs avatar pull-left mr-sm">
+                                        <img class="img-circle" src="storage/images/{{Auth::user()->avatar}}" alt="...">
+                                    </span>
+
+                                    <div class="comment-body">
+                                    <form  method="POST" action="/home/{{$post->id}}/{{Auth::user()->id }}/store">
+                                            {{ csrf_field () }}
+                                        <input class="form-control input-sm" name="body" type="text" placeholder="Write your comment...">
+                                       </form>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </footer>
+                </section>   
+            
+
+    </div>
+
+
+
+            @endif
+          @endif    
+                       
+          
+         
+        
+
+         @endif
+
+         @endif   <!-- end accpet -->
+          
+         @else
+              @if($post->public !== 1)
+
+             <!-- userAuth is admin or editor-->
+              
+     <!-- Second Post type form (post with pic)-->
+        <div class="col-md-offset-3 col-md-6 col-xs-12">
+                <section class="widget">
+                    <div class="widget-controls">
+                            
+                            <!-- <a href="javascript:void(0)" class="dropbtn" data-widgster="close"> -->
+                                    <div class="dropdownpost">
+                                       @if((Auth::user()->hasRole('Admin')) && ((Auth::user()->id)!=($post->user->id)))
+                                            <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
+                                            <div class="dropdown-contentpost">
+                                                <a href="{{url('home/'.$post -> id.'/edit')}}">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                </a>
+                                            </div>
+                                                 @else
+                                                  <!--user is not admin -->
+                                                @if((Auth::user()->id)===($post->user->id))
+                                                 <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
+                                                <div class="dropdown-contentpost">
+                                                <a href="{{url('home/'.$post -> id.'/edit')}}">
+                                                            <i class="fas fa-edit"></i>
+                                                            Edit
+                                                </a>
+                                                <form  method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
+                                                <a href="#">
+                                                   
+                                                   {{ csrf_field () }}
+                                                   {{ method_field ('DELETE') }}
+                                                    
+                                                    <button type='submit'><i class="fas fa-trash" style="color:red; font-size:11px;"></i></button>
+                                                   
+                                                </a>
+                                              </form>
+                                              
+                                            </div>
+                                             @endif
+                                            @endif
+                                    </div>
+                       
+                    </div>
+                    <div class="widget-body">
+                        <div class="widget-top-overflow text-white">
+                           @foreach($post->images as $image)
+                            <img  class="cover" src="storage/images/{{$image->url_image}}"style="width:800px;height:400px;">
+                            @endforeach
+                            <!-- <ul class="tags text-white pull-right">
+                                <li><a href="#">design</a></li>
+                                <li><a href="#">white</a></li>
+                            </ul> -->
+                        </div>
+                        <div class="post-user mt-sm">
+                            <div class="thumb-lg pull-left mr">
+                            <!-- show the avatat of the post owner -->
+                            <div class="drpdn">
+                                    <img src="storage/images/{{$post->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                    <div class="drpdn-content">
+                                      <img src="storage/images/{{$post->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                      <div class="desc">
+                                         {{$post->user->name}}
+                                         {{$post->user->first_name}}
+                                      </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                             <h7 class="author "><span class="fw-semi-bold">{{$post->user->name}}</span> {{$post->user->first_name}}</h7>
+                            <p class="fs-mini text-muted"><time>{{$post->created_at->diffForHumans()}}</time>
+                                 <!-- &nbsp; <i class="fa fa-map-marker"></i> &nbsp; near Amsterdam</p> -->
+                       <style>
+                      
+                       </style>
+                         
+                          <div class="notepaper">
+                            <figure class="quote">
+                                <blockquote class="curly-quotes">
+                                {{$post -> body}}
+                                </blockquote>
+    
+                            </figure>
+                          </div>
+                       
+                          </div>
+
+
+
+                     
+
+                    </div>
+                    
+
+
+                  
+                    <footer class="bg-body-light">
+                       @foreach($post->files as $file)
+                                                 
+                      <p>{{$file->url_file}}
+        <a href="#">
+          <span class="glyphicon glyphicon-download-alt"></span>
+        </a>
+      </p>
+                    @endforeach
+                            <ul class="post-links">
+
+                                <!-- like and comment footer -->
+
+                                <li><a href="#">
+                                    <i class="far fa-comment-dots"></i>
+                                     Comment</a></li>
+                            </ul>
+                   
+                             <!-- show comments -->
+                         
+                           
+                            <ul class="post-comments mt mb-0">
+                             @foreach ($post->comments as $comment)
+                                <li>
+                                    <div class="thumb-xs avatar pull-left mr-sm">
+                                            <!-- show the avatat of the post owner -->
+                                            <div class="drpdn">
+                                                    <img src="storage/images/{{$comment->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                                    <div class="drpdn-content">
+                                                      <img src="storage/images/{{$comment->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                                      <div class="desc">
+                                                         {{$post->user->name}}<br>
+                                                         {{$post->user->first_name}}
+                                                      </div>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    <div class="comment-body">
+                                        <h6 class="author fw-semi-bold">{{$comment->user->name}} &nbsp; {{$post->user->first_name}} <small>{{$comment->created_at ->diffForHumans()}}</small></h6>
+                                        <p>{{$comment-> body}}</p>
+                                    </div>
+                                </li>
+                                 @endforeach    <!-- end show comment -->
+                                <li>
+                                    <span class="thumb-xs avatar pull-left mr-sm">
+                                        <img class="img-circle" src="storage/images/{{Auth::user()->avatar}}" alt="...">
+                                    </span>
+
+                                    <div class="comment-body">
+                                    <form  method="POST" action="/home/{{$post->id}}/{{Auth::user()->id }}/store">
+                                            {{ csrf_field () }}
+                                        <input class="form-control input-sm" name="body" type="text" placeholder="Write your comment...">
+                                       </form>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </footer>
+                </section>   
+            
+
+    </div>
+
+
+
+         @endif   <!--  --> 
+            @endif 
         @endforeach  
 
 
@@ -237,8 +931,9 @@
 
           
           
-  
- 
+  </div>
+ </div>
+</div>
 
 
     

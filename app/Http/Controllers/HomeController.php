@@ -43,6 +43,33 @@ class HomeController extends Controller
             
            return view ('content.home', compact('posts')); 
     }
+     public function level()
+    {
+
+           $posts = Post::orderBy("updated_at",'desc')->paginate(4);
+          
+           $comments= Comment::all();
+            
+           return view ('content.level', compact('posts')); 
+    }
+     public function section()
+    {
+
+           $posts = Post::orderBy("updated_at",'desc')->paginate(4);
+          
+           $comments= Comment::all();
+            
+           return view ('content.section', compact('posts')); 
+    }
+     public function group()
+    {
+
+           $posts = Post::orderBy("updated_at",'desc')->paginate(4);
+          
+           $comments= Comment::all();
+            
+           return view ('content.group', compact('posts')); 
+    }
 
 
      public function store(Request $request)
@@ -51,7 +78,7 @@ class HomeController extends Controller
        
            $this ->validate(request(),[
      
-             'title'=>'min:3',
+            // 'title'=>'min:3',
              'body' => 'min:5',
      
       ]);
@@ -59,11 +86,15 @@ class HomeController extends Controller
     
     'images.*' => 'image|mimes:jpeg,png,jpg,gif',
 ]);
-
+     
+        $this->validate($request, [
+    
+           'file' => 'max:500000',
+         ]);
    
           
           $post       = new Post;   
-          $post->title=request ("title");
+        //  $post->title=request ("title");
           $post->body = request ("body");
           $post->public = request ("public");
           $post->user_id=Auth::user()->id;
@@ -102,11 +133,11 @@ class HomeController extends Controller
            
              $files=new File;
              $files->post_id=$post->id;
-         
              
-             $filename = time().'.'.$request->file->getClientOriginalExtension();
+             
+             $filename =request ("file");
              //$files->url_file =$request->file->store('files');
-          
+             $files->url_file=$filename;
             $request->file->move(public_path('storage\files'), $filename);
             $files->url_file=$filename;
             
