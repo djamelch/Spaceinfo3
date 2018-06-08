@@ -41,7 +41,7 @@
       <div class="text-center mb-4">
         <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         <h1 class="h3 mb-3 font-weight-normal"><strong>Register</strong></h1>
-        <p>Fill the registration form with your truth informations, Or Go To Sign Up <a href="/login">Here</a> </p>
+        <p><b>Fill the registration form with your truth informations, Or Go To Sign Up <a href="/login">Here</a></b> </p>
       </div>
 
       <!-- form -->
@@ -94,37 +94,34 @@
         <input type="password" name="password_confirmation" id="password-confirm" class="form-control" placeholder="Confirm Password" required>
         <label for="password-confirm">Confirm Password</label>
       </div>
-
+      
       <div class="form-label-group {{ $errors->has("matricule") ? " has-error" : "" }}">
         <input  id="matricule" name="matricule"  type="text" class="form-control" placeholder="Enter Your" required autofocus>@if ($errors->has("matricule")) <span class="help-block"><strong>{{ $errors->first("matricule") }}</strong></span>@endif<label for="matricule"> Matricule</label></div>
 
-
-
-      <div class="form-label-group">
-         Student <input type ='radio' id='1' name='1'  onclick="check()" value='student'>
-
-
-          No Student <input type ='radio' id='2' name='1'  onclick="nocheck()" >
-      </div>          
-         
-           <div id="3">
-
-          </div>
-
-
-       <script  >
-        function nocheck()
-        {
-          document.getElementById("3").innerHTML ='<div id="2"></div>';
-
-          
-        }
        
-       function check()
-        {
-          document.getElementById("3").innerHTML ='<div class="form-label-group"><select class="custom-select d-block w-100" id="levelclass" name="level"> <option value="">Choose Your Level Class</option><option>1st Class</option><option>2nd Class</option><option>3rd Class</option> <option>4th Class</option> <option>5th Class</option> </select> </div> <div class="form-label-group"><select class="custom-select d-block w-100" id="section"  name="section"><option value="">Choose Your Section</option><option>Section A</option> <option>Section B</option> <option>Section C</option></select> </div><div class="form-label-group">  <select class="custom-select d-block w-100" id="group"   name="group"> <option value="">Choose Your Group</option> <option>1st Group</option>  <option>2nd Group</option><option>3rd Group</option> <option>4th Group</option></select></div> ';
-       }
-        </script>
+      <b>If you are student fill in he form </b><br><br>
+      
+          <div class="form-label-group">
+            <select class="custom-select d-block w-100" id="levelclass" name="level"> 
+              <option value="">Choose Your Level Class</option>
+              <option>1st Class</option><option>2nd Class</option><option>3rd Class</option> <option>4th Class</option> <option>5th Class</option>
+             </select> 
+           </div>
+         <div class="form-label-group">
+          <select class="custom-select d-block w-100" id="section"  name="section"><option value="">Choose Your Section</option>
+            <option>Section A</option> <option>Section B</option> <option>Section C</option>
+          </select> 
+        </div>
+        <div class="form-label-group"> 
+         <select class="custom-select d-block w-100" id="group"   name="group"> <option value="">Choose Your Group</option> 
+          <option>1st Group</option>  
+          <option>2nd Group</option>
+          <option>3rd Group</option> 
+          <option>4th Group</option>
+        </select>
+      </div> ';
+      
+        
 
 
       <button class="btn btn-lg btn-primary btn-block btn-outline-primary" type="submit">
@@ -137,7 +134,7 @@
 
       <footer class="mastfoot mt-auto">
         <div class="inner">
-          <p>Cover template for <a href="/">ENS SpaceInfo Website</a>.</p>
+          <p><a href="/">ENS SpaceInfo Website</a>.</p>
         </div>
       </footer>
     </div>

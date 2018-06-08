@@ -46,7 +46,7 @@ class HomeController extends Controller
      public function level()
     {
 
-           $posts = Post::orderBy("updated_at",'desc')->paginate(4);
+           $posts = Post::Where('for_level','1')->orderBy("updated_at",'desc')->paginate(4);
           
            $comments= Comment::all();
             
@@ -55,7 +55,7 @@ class HomeController extends Controller
      public function section()
     {
 
-           $posts = Post::orderBy("updated_at",'desc')->paginate(4);
+           $posts = Post::Where('for_section','1')->orderBy("updated_at",'desc')->paginate(4);
           
            $comments= Comment::all();
             
@@ -64,7 +64,7 @@ class HomeController extends Controller
      public function group()
     {
 
-           $posts = Post::orderBy("updated_at",'desc')->paginate(4);
+           $posts = Post::Where('for_group','1')->orderBy("updated_at",'desc')->paginate(4);
           
            $comments= Comment::all();
             

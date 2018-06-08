@@ -6,18 +6,22 @@
 
  
     <link href="{{asset('assets/css/posts.css')}}" rel="stylesheet">
-     @foreach($posts as $post)
 
-      @if((Auth::user()->hasRole('User'))&& (Auth::user()->level !=null)&&(Auth::user()->section !=null)&&(Auth::user()->group !=null))&&($post->accpet === 1)&&($post->for_level === 1)&&($post->user->level === (Auth::user()->level))
+    @foreach($posts as $post) <!-- begin foreach post  -->  
 
-                      <!-- Second Post type form (post with pic)-->
-        <div class="col-md-offset-3 col-md-6 col-xs-12">
+      @if((Auth::user()->hasRole('User'))&& (Auth::user()->level !=null)&&(Auth::user()->section !=null)&&(Auth::user()->group !=null))
+       @if($post->accpet === 1)
+          @if($post->for_level === 1)
+                     @if($post->user->level === (Auth::user()->level))
+                      <!--  *********   show posts ***********  -->
+               
+  <div class="col-md-offset-3 col-md-6 col-xs-12">
                 <section class="widget">
                     <div class="widget-controls">
                             
                             <!-- <a href="javascript:void(0)" class="dropbtn" data-widgster="close"> -->
                                     <div class="dropdownpost">
-                                       @if((Auth::user()->hasRole('Admin')) && ((Auth::user()->id)!=($post->user->id)))
+                                    	 @if((Auth::user()->hasRole('Admin')) && ((Auth::user()->id)!=($post->user->id)))
                                             <i class="fas fa-ellipsis-h" style="color:#123445; font-size:15px;"></i>
                                             <div class="dropdown-contentpost">
                                                 <a href="{{url('home/'.$post -> id.'/edit')}}">
@@ -36,7 +40,7 @@
                                                 </a>
                                                 <form  method="POST" action="{{url('home/'.$post -> id.'/distroy')}}">
                                                 <a href="#">
-                                                   
+                                                	 
                                                    {{ csrf_field () }}
                                                    {{ method_field ('DELETE') }}
                                                     
@@ -53,7 +57,7 @@
                     </div>
                     <div class="widget-body">
                         <div class="widget-top-overflow text-white">
-                           @foreach($post->images as $image)
+                        	 @foreach($post->images as $image)
                             <img  class="cover" src="storage/images/{{$image->url_image}}"style="width:800px;height:400px;">
                             @endforeach
                             <!-- <ul class="tags text-white pull-right">
@@ -104,7 +108,7 @@
 
                   
                     <footer class="bg-body-light">
-                       @foreach($post->files as $file)
+                    	 @foreach($post->files as $file)
                                                  
                       <p>{{$file->url_file}}
         <a href="#">
@@ -165,8 +169,19 @@
             
 
     </div>
+   @endif
+    @endif
+     @endif
+      @endif
+     @endforeach  
 
+ <div class="col-md-offset-3 col-md-6 col-xs-12">
+   
+         <div class="raw text-center">
+         {!!$posts->render()!!}
 
-               @endif
-               @endforeach
-               @endsection
+         </div>
+ </div>
+          
+
+@endsection

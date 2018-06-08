@@ -15,10 +15,10 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
+            //$table->string('title');
             $table->text('body');
 
-            $table->boolean('for_group')->default('1');
+            $table->boolean('for_group')->nullable($value = true);
             $table->boolean('for_section')->nullable($value = true);
             $table->boolean('for_level')->nullable($value = true);
 

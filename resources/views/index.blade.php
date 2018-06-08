@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>social blog post widget with commets - Bootdey.com</title>
+    <title>ENS Spaceinfo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -20,10 +20,10 @@
 
    
 </head>
-<body>
+<body style="background: url('assets/img/bg1.jpg');">
         <header>
                <div class="cd-logo"><a href="#0">
-                        <svg class="hvr-grow"viewBox="0 0 566.379150390625 160" preserveAspectRatio="xMidYMid meet" style="width: 80%; height: 80%;" id="bbcadedh"><defs id="SvgjsDefs1582"></defs><g id="SvgjsG1583" featurekey="root" fill="#000000" transform="matrix(1,0,0,1,0,0)"></g><g id="SvgjsG1584" featurekey="symbol1" fill="#ffffff" transform="matrix(2.0833332538604736,0,0,2.0833332538604736,43.75,30)"><title>ENS SPACEINFO made by @momo.setti</title><g data-name="28-Idea">
+                        <svg class="hvr-grow"viewBox="0 0 566.379150390625 160" preserveAspectRatio="xMidYMid meet" style="width: 60%; height: 70%;" id="bbcadedh"><defs id="SvgjsDefs1582"></defs><g id="SvgjsG1583" featurekey="root" fill="#000000" transform="matrix(1,0,0,1,0,0)"></g><g id="SvgjsG1584" featurekey="symbol1" fill="#ffffff" transform="matrix(2.0833332538604736,0,0,2.0833332538604736,43.75,30)"><title>ENS SPACEINFO made by @momo.setti</title><g data-name="28-Idea">
                             <path d="M35,2a10,10,0,0,0-4,19.157V23h2V20.477a1,1,0,0,0-.666-.943,8,8,0,1,1,5.332,0,1,1,0,0,0-.666.943V23h2V21.157A10,10,0,0,0,35,2Z"></path>
                             <path d="M30,12h2a3,3,0,0,1,3-3V7A5.006,5.006,0,0,0,30,12Z"></path>
                             <path d="M39,36H37a.915.915,0,0,1-1-1V33h1a1,1,0,0,0,1-1V30a1,1,0,0,0,1-1V27h2V25H29v2h2v2a1,1,0,0,0,1,1v2a1,1,0,0,0,1,1h1v2a2.916,2.916,0,0,0,3,3h1.988A.918.918,0,0,1,40,39v7H21V39c0-3.164-1.962-4-3-4H12a1.883,1.883,0,0,1-2-2V29.272a1,1,0,0,0-.337-.748A5.771,5.771,0,0,0,6,27a.878.878,0,0,1-.979-.779l4.855-8.8A1.006,1.006,0,0,0,10,16.938V15A13.015,13.015,0,0,1,23,2h5V0H23A15.017,15.017,0,0,0,8,15v1.681L3.124,25.517A1.006,1.006,0,0,0,3,26a2.916,2.916,0,0,0,3,3,3.581,3.581,0,0,1,2,.749V33a3.888,3.888,0,0,0,4,4h5.972c.171.012,1.028.16,1.028,2v8a1,1,0,0,0,1,1H41a1,1,0,0,0,1-1V39A2.916,2.916,0,0,0,39,36Zm-2-9v1H33V27Zm-1,3v1H34V30Z">
@@ -34,51 +34,51 @@
                         </svg>
                 </a></div>
         
-                <nav class="cd-main-nav-wrapper">
+               
+                    </ul>  
+                     <nav class="cd-main-nav-wrapper">
                     <ul class="cd-main-nav">
-
                         <li><a href="/home">Home</a></li>
                         <li><a href="/profile">Profile</a></li>
-                        <li><a href="{{ url('/logout') }}">Logout</a></li>
-                        
+                        <li><a href="{{ url('/logout') }}">Logout</a></li>             
                         <li><a href="#0">Contact</a></li>
+                        
                         <li>
-
                             <a href="#0" class="cd-subnav-trigger"><span>
-                             @if(Auth::user()->hasRole('Admin'))
+                                @if(Auth::user()->hasRole('Admin'))
                                 Menu
                               @else
                                 Categorys
                              @endif
-                               </span></a>
+                         </span></a>
+        
                             <ul>
-                                <li class="go-back"><a href="#0">Menu</a></li>
-                                
-                            @if(Auth::user()->hasRole('Admin'))
+                                @if(Auth::user()->hasRole('Admin'))
                                 <li><a href="/admin">Users</a></li>
                                 <li><a href="post_approve/">Publication</a></li>
                                 <li><a href="/user">Activation User</a></li>
                                 
                              @else
                              @if(Auth::user()->level !==null )
-                               <li><a href="{{ url('/logout') }}">Logout</a></li>
-                                <li><a href="/level">{{Auth::user()->level}}</a></li>
-                                <li><a href="/section">{{Auth::user()->section}}</a></li> 
-                                <li><a href="/group">{{Auth::user()->group}}</a></li>
-                            @endif 
-                            @endif                          
+                               <li><a href="/level">Level</a></li>
+                                <li><a href="/section">Section</a></li>
+                                <li><a href="/group">group</a></li>
+                               
+                             @endif 
+                             @endif
                                 <li>
                                     <a href="/profile">
-                                        <img src="storage/images/{{Auth::user()->avatar}}" class="img-circle hvr-grow" alt="Trolltunga Norway" height="50" width="50">&nbsp;
-                                    
+                                        <img src="assets/img/{{Auth::user()->avatar}}" class="img-circle hvr-grow" alt="Trolltunga Norway" height="50" width="50">
+                                      
                                        {{Auth::user()->name}}   {{Auth::user()->first_name}}
                                     </a>
                                 </li>
-                                
+                                <li><a href="#0" class="placeholder">Placeholder</a></li>
                             </ul>
                         </li>
                     </ul> <!-- .cd-main-nav -->
                 </nav> <!-- .cd-main-nav-wrapper -->
+                
                 
                 <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
         </header>

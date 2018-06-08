@@ -26,7 +26,7 @@ class UserController extends Controller
         // rename image name or file name 
         $getimageName = time().'.'.$request->avatar->getClientOriginalExtension();
      
-        $request->avatar->move(public_path('storage\images'), $getimageName);
+        $request->avatar->move(public_path('assets/img/'), $getimageName);
        
 
             

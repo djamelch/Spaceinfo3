@@ -14,32 +14,30 @@
 
                
 
-                <div class="cardheader" style="background: url('storage/images/{{$user->couvert}}');">
+                <div class="cardheader" style="background: url('assets/img/{{$user->couvert}}');">
 
                 </div>
 
                  <div class="dropdownpost">
                                       
-                        <form enctype="multipart/form-data" action="/profile" method="POST">
-                                        {{ csrf_field () }}
+                        
                                                        
                         <div class="dropdown-contentpost">
-
+                            <form enctype="multipart/form-data" action="/profile" method="POST">
+                                        {{ csrf_field () }}
                                 <div class="upload-btnn-wrapper">
                                      <input type="file" name="avatar" accept="image/*" />  
                                 </div>
+                             </form>
                        </div>
                 
                 <div class="avatar"
-                 class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="edit avatar" style="width:200px; height:200px; float:left; border-radius:70%; margin-right:30px;" class="fir-author-image fir-clickcircle">
+                >
                   
-                    <img alt="" src="storage/images/{{$user->avatar}}" >
+                    <img alt="" src="assets/img/{{$user->avatar}}"  >
 
-                    <button type="submit"  class="btn btn-primary btn-xs pull-right" value="Submit">Share</button>
-                </div>
-                
-                
-                  </form>
+                    <button  class="form-control input-sm" value="Submit"> <i class="fas fa-edit"></i></button>
+                </div>                
 
                    </div>
                 
@@ -211,7 +209,7 @@
                     <div class="widget-body">
                         <div class="widget-top-overflow text-white">
                            @foreach($post->images as $image)
-                            <img  class="cover" src="storage/images/{{$image->url_image}}"style="width:800px;height:400px;">
+                            <img  class="cover" src="assets/img/{{$image->url_image}}"style="width:800px;height:400px;">
                             @endforeach
                             <!-- <ul class="tags text-white pull-right">
                                 <li><a href="#">design</a></li>
@@ -222,9 +220,9 @@
                             <div class="thumb-lg pull-left mr">
                             <!-- show the avatat of the post owner -->
                             <div class="drpdn">
-                                    <img src="storage/images/{{$post->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                    <img src="assets/img/{{$post->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
                                     <div class="drpdn-content">
-                                      <img src="storage/images/{{$post->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                      <img src="assets/img/{{$post->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
                                       <div class="desc">
                                          {{$post->user->name}}
                                          {{$post->user->first_name}}
@@ -287,9 +285,9 @@
                                     <div class="thumb-xs avatar pull-left mr-sm">
                                             <!-- show the avatat of the post owner -->
                                             <div class="drpdn">
-                                                    <img src="storage/images/{{$comment->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
+                                                    <img src="assets/img/{{$comment->user->avatar}}" class="img-circle" alt="Trolltunga Norway" width="100" height="50">
                                                     <div class="drpdn-content">
-                                                      <img src="storage/images/{{$comment->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
+                                                      <img src="assets/img/{{$comment->user->avatar}}" alt="Trolltunga Norway" width="300" height="200">
                                                       <div class="desc">
                                                          {{$post->user->name}}<br>
                                                          {{$post->user->first_name}}
@@ -305,7 +303,7 @@
                                  @endforeach    <!-- end show comment -->
                                 <li>
                                     <span class="thumb-xs avatar pull-left mr-sm">
-                                        <img class="img-circle" src="storage/images/{{Auth::user()->avatar}}" alt="...">
+                                        <img class="img-circle" src="assets/img/{{Auth::user()->avatar}}" alt="...">
                                     </span>
 
                                     <div class="comment-body">

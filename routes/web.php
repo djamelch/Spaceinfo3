@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/level', 'HomeController@level');
+Route::get('/level', 'HomeController@level');
 
-Route::post('/section', 'HomeController@section');
-Route::post('/group', 'HomeController@group');
+Route::get('/section', 'HomeController@section');
+Route::get('/group', 'HomeController@group');
 
 
 
